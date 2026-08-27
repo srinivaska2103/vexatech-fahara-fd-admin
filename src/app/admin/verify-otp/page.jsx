@@ -43,40 +43,36 @@ export default function VerifyOtp() {
   const verifyMutation = useMutation({
     mutationFn: async (data) => {
       const tempToken = Cookies.get('adminTempToken');
-      const response = await api.post('/auth/verify-otp', {
-        email,
-        otp: data.otp,
-        tempToken,
-      });
+      const currentEmail = email || (typeof window !== 'undefined' ? localStorage.getItem('adminAuthEmail') : '');
+      const payload = { email: currentEmail, otp: String(data.otp).trim() };
+      if (tempToken) payload.tempToken = tempToken;
+
+      const response = await api.post('/auth/admin/verify-login', payload);
       return response.data;
     },
     onSuccess: (data) => {
-      if (from === 'signup') {
-        toast.success('Email verified successfully! Please log in.');
-        Cookies.remove('adminTempToken');
-        localStorage.removeItem('adminAuthEmail');
-        localStorage.removeItem('adminAuthFrom');
-        router.push('/admin/login');
-        return;
-      }
-
-      if (data.user?.role !== 'ADMIN') {
+      const userRole = data.user?.role || data.role;
+      if (userRole && userRole !== 'ADMIN') {
         toast.error('Unauthorized access. Admin privileges required.');
         Cookies.remove('adminTempToken');
         router.push('/admin/login');
         return;
       }
 
-      Cookies.set('adminAccessToken', data.accessToken, { secure: true, sameSite: 'strict' });
+      if (data.accessToken) {
+        Cookies.set('adminAccessToken', data.accessToken, { sameSite: 'lax' });
+      }
       if (data.refreshToken) {
-        Cookies.set('adminRefreshToken', data.refreshToken, { secure: true, sameSite: 'strict' });
+        Cookies.set('adminRefreshToken', data.refreshToken, { sameSite: 'lax' });
       }
       
       Cookies.remove('adminTempToken');
       localStorage.removeItem('adminAuthEmail');
       localStorage.removeItem('adminAuthFrom');
 
-      setUser(data.user);
+      if (data.user) {
+        setUser(data.user);
+      }
       toast.success('Successfully authenticated');
       router.push('/admin/dashboard');
     },

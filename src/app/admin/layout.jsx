@@ -14,7 +14,6 @@ export default function AdminLayout({ children }) {
   // Do not show sidebar or layout frame on auth pages
   const isAuthPage = [
     '/admin/login',
-    '/admin/signup',
     '/admin/forgot-password',
     '/admin/reset-password',
     '/admin/verify-otp'

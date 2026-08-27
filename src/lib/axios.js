@@ -62,10 +62,10 @@ api.interceptors.response.use(
         });
 
         const newAccessToken = data.accessToken;
-        Cookies.set('adminAccessToken', newAccessToken, { secure: true, sameSite: 'strict' });
+        Cookies.set('adminAccessToken', newAccessToken, { sameSite: 'lax' });
         
         if (data.refreshToken) {
-          Cookies.set('adminRefreshToken', data.refreshToken, { secure: true, sameSite: 'strict' });
+          Cookies.set('adminRefreshToken', data.refreshToken, { sameSite: 'lax' });
         }
 
         api.defaults.headers.common['Authorization'] = 'Bearer ' + newAccessToken;
