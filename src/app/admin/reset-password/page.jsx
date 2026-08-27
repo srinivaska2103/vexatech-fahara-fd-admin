@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'react-hot-toast';
-import { Lock, Loader2, CheckCircle2, KeyRound } from 'lucide-react';
+import { Lock, Loader2, CheckCircle2, KeyRound, Eye, EyeOff } from 'lucide-react';
 import { motion } from 'framer-motion';
 import api from '@/lib/axios';
 import { Suspense, useState, useEffect } from 'react';
@@ -24,6 +24,8 @@ function ResetPasswordForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [email, setEmail] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   useEffect(() => {
     const storedEmail = localStorage.getItem('adminResetEmail');
@@ -117,11 +119,23 @@ function ResetPasswordForm() {
             </div>
             <input
               {...register('password')}
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               disabled={resetMutation.isPending}
-              className={`block w-full pl-10 pr-4 py-3 text-sm border ${errors.password ? 'border-red-500' : 'border-fahara-border'} rounded-xl bg-fahara-background focus:outline-none focus:ring-2 focus:ring-fahara-primary/40 focus:border-fahara-primary transition-all text-fahara-text placeholder:text-fahara-secondary/50`}
+              className={`block w-full pl-10 pr-10 py-3 text-sm border ${errors.password ? 'border-red-500' : 'border-fahara-border'} rounded-xl bg-fahara-background focus:outline-none focus:ring-2 focus:ring-fahara-primary/40 focus:border-fahara-primary transition-all text-fahara-text placeholder:text-fahara-secondary/50`}
               placeholder="••••••••"
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-fahara-secondary hover:text-fahara-text focus:outline-none transition-colors cursor-pointer"
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword ? (
+                <EyeOff className="h-4 w-4" />
+              ) : (
+                <Eye className="h-4 w-4" />
+              )}
+            </button>
           </div>
           {errors.password && (
             <p className="mt-1.5 text-xs text-red-500">{errors.password.message}</p>
@@ -136,11 +150,23 @@ function ResetPasswordForm() {
             </div>
             <input
               {...register('confirmPassword')}
-              type="password"
+              type={showConfirmPassword ? 'text' : 'password'}
               disabled={resetMutation.isPending}
-              className={`block w-full pl-10 pr-4 py-3 text-sm border ${errors.confirmPassword ? 'border-red-500' : 'border-fahara-border'} rounded-xl bg-fahara-background focus:outline-none focus:ring-2 focus:ring-fahara-primary/40 focus:border-fahara-primary transition-all text-fahara-text placeholder:text-fahara-secondary/50`}
+              className={`block w-full pl-10 pr-10 py-3 text-sm border ${errors.confirmPassword ? 'border-red-500' : 'border-fahara-border'} rounded-xl bg-fahara-background focus:outline-none focus:ring-2 focus:ring-fahara-primary/40 focus:border-fahara-primary transition-all text-fahara-text placeholder:text-fahara-secondary/50`}
               placeholder="••••••••"
             />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-fahara-secondary hover:text-fahara-text focus:outline-none transition-colors cursor-pointer"
+              aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+            >
+              {showConfirmPassword ? (
+                <EyeOff className="h-4 w-4" />
+              ) : (
+                <Eye className="h-4 w-4" />
+              )}
+            </button>
           </div>
           {errors.confirmPassword && (
             <p className="mt-1.5 text-xs text-red-500">{errors.confirmPassword.message}</p>

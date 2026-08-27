@@ -9,7 +9,7 @@ export function middleware(request) {
   }
 
   // Allow access to auth pages
-  const authRoutes = ['/admin/login', '/admin/signup', '/admin/verify-otp', '/admin/forgot-password', '/admin/reset-password'];
+  const authRoutes = ['/admin/login', '/admin/verify-otp', '/admin/forgot-password', '/admin/reset-password'];
   if (authRoutes.some(route => pathname.startsWith(route))) {
     return NextResponse.next();
   }

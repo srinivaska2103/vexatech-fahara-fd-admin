@@ -12,7 +12,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
 # Build-time API URL
-ARG NEXT_PUBLIC_API_URL=https://api.fahara.in
+ARG NEXT_PUBLIC_API_URL=https://api.fahara.in/api/v1
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 
 RUN echo "====================================="
