@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import api from '@/lib/axios';
-import { Search, Filter, Receipt, Loader2, DollarSign, CheckCircle2, TrendingUp, Percent } from 'lucide-react';
+import { Search, Filter, Receipt, Loader2, IndianRupee, CheckCircle2, TrendingUp, Percent } from 'lucide-react';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 
@@ -75,7 +75,7 @@ export default function TransactionsPage() {
           <div className="flex justify-between items-center">
             <span className="text-xs font-semibold uppercase tracking-wider text-fahara-secondary">Gross Volume</span>
             <div className="h-9 w-9 rounded-xl bg-blue-50 text-blue-600 border border-blue-200 flex items-center justify-center">
-              <DollarSign className="h-4 w-4" />
+              <IndianRupee className="h-4 w-4" />
             </div>
           </div>
           <div className="text-2xl font-extrabold text-fahara-text mt-2">₹{totalGross.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>

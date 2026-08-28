@@ -60,10 +60,10 @@ export default function VerifyOtp() {
       }
 
       if (data.accessToken) {
-        Cookies.set('adminAccessToken', data.accessToken, { sameSite: 'lax' });
+        Cookies.set('adminAccessToken', data.accessToken, { path: '/', expires: 7, sameSite: 'lax' });
       }
       if (data.refreshToken) {
-        Cookies.set('adminRefreshToken', data.refreshToken, { sameSite: 'lax' });
+        Cookies.set('adminRefreshToken', data.refreshToken, { path: '/', expires: 30, sameSite: 'lax' });
       }
       
       Cookies.remove('adminTempToken');

@@ -62,10 +62,10 @@ api.interceptors.response.use(
         });
 
         const newAccessToken = data.accessToken;
-        Cookies.set('adminAccessToken', newAccessToken, { sameSite: 'lax' });
+        Cookies.set('adminAccessToken', newAccessToken, { path: '/', expires: 7, sameSite: 'lax' });
         
         if (data.refreshToken) {
-          Cookies.set('adminRefreshToken', data.refreshToken, { sameSite: 'lax' });
+          Cookies.set('adminRefreshToken', data.refreshToken, { path: '/', expires: 30, sameSite: 'lax' });
         }
 
         api.defaults.headers.common['Authorization'] = 'Bearer ' + newAccessToken;

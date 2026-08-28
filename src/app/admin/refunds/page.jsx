@@ -44,6 +44,10 @@ export default function AdminRefundsPage() {
   const handleSyncAll = async () => {
     try {
       setIsSyncingAll(true);
+      if (refunds && refunds.length > 0) {
+        await Promise.allSettled(refunds.map(r => api.post(`/payments/admin/refunds/${r.id}/sync`)));
+      }
+      await queryClient.invalidateQueries({ queryKey: ['adminRefunds'] });
       await refetch();
     } catch (err) {
       alert('Failed to refresh refund statuses');
