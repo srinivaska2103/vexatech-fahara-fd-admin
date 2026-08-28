@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import api from '@/lib/axios';
-import { Search, Filter, CreditCard, Eye, Loader2, DollarSign, CheckCircle2, AlertTriangle, ArrowUpRight } from 'lucide-react';
+import { Search, Filter, CreditCard, Eye, Loader2, IndianRupee, CheckCircle2, AlertTriangle, ArrowUpRight } from 'lucide-react';
 import { format } from 'date-fns';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -65,7 +65,7 @@ export default function AdminPaymentsPage() {
           <div className="flex justify-between items-center">
             <span className="text-xs font-semibold uppercase tracking-wider text-fahara-secondary">Total Processed Volume</span>
             <div className="h-9 w-9 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center">
-              <DollarSign className="h-4 w-4" />
+              <IndianRupee className="h-4 w-4" />
             </div>
           </div>
           <div className="text-2xl font-extrabold text-fahara-text mt-2">₹{totalVolume.toLocaleString('en-IN')}</div>

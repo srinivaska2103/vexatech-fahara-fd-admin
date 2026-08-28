@@ -18,8 +18,8 @@ export const useAdminAuthStore = create((set, get) => ({
   setInitialized: (status) => set({ isInitialized: status }),
 
   logout: () => {
-    Cookies.remove('adminAccessToken');
-    Cookies.remove('adminRefreshToken');
+    Cookies.remove('adminAccessToken', { path: '/' });
+    Cookies.remove('adminRefreshToken', { path: '/' });
     set({ user: null, isAuthenticated: false });
     if (typeof window !== 'undefined') {
       window.location.href = '/admin/login';

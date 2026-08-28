@@ -47,6 +47,10 @@ export default function PayoutsList() {
   const handleSyncAll = async () => {
     try {
       setIsSyncingAll(true);
+      if (payouts.length > 0) {
+        await Promise.allSettled(payouts.map(p => api.post(`/payments/admin/payouts/${p.id}/sync`)));
+      }
+      await queryClient.invalidateQueries({ queryKey: ['adminPayouts'] });
       await refetch();
     } catch (e) {
       alert('Failed to refresh payout statuses');

@@ -9,7 +9,7 @@ import {
 } from 'recharts';
 import { 
   TrendingUp, CreditCard, RefreshCcw, 
-  Wallet, ShieldCheck, Activity, Calendar, DollarSign, Loader2, Sparkles, Percent, CheckCircle2 
+  Wallet, ShieldCheck, Activity, Calendar, DollarSign, Loader2, Sparkles, Percent, CheckCircle2, Receipt 
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -29,6 +29,8 @@ export default function RevenueDashboard() {
   const grossVal = Number(revenueData?.gross_booking_value ?? revenueData?.grossBookingValue ?? 0);
   const cafePayableVal = Number(revenueData?.cafe_payable ?? revenueData?.cafePayable ?? 0);
   const eventPayableVal = Number(revenueData?.event_manager_payable ?? revenueData?.eventManagerPayable ?? 0);
+  const gstTaxVal = Number(revenueData?.gst_tax ?? revenueData?.gst_amount ?? revenueData?.gstAmount ?? 0);
+  const txnFeeVal = Number(revenueData?.transaction_fee ?? revenueData?.transactionFee ?? 0);
   
   let faharaRevVal = Number(revenueData?.fahara_platform_revenue ?? revenueData?.fahara_revenue ?? revenueData?.faharaRevenue ?? 0);
   if (faharaRevVal === 0 && grossVal > 0) {
@@ -44,6 +46,8 @@ export default function RevenueDashboard() {
   const stats = [
     { name: 'Gross Booking Value', value: grossVal, icon: Wallet, color: 'text-blue-600', bg: 'bg-blue-50 border-blue-200' },
     { name: 'Fahara Revenue', value: faharaRevVal, icon: Percent, color: 'text-fahara-primary', bg: 'bg-amber-50 border-amber-200' },
+    { name: 'GST Tax Collected', value: gstTaxVal, icon: ShieldCheck, color: 'text-indigo-600', bg: 'bg-indigo-50 border-indigo-200' },
+    { name: 'Transaction Fee', value: txnFeeVal, icon: Receipt, color: 'text-cyan-600', bg: 'bg-cyan-50 border-cyan-200' },
     { name: 'Refunds Settled', value: Number(revenueData?.refunds || 0), icon: RefreshCcw, color: 'text-rose-600', bg: 'bg-rose-50 border-rose-200' },
     { name: 'Cafe Payable', value: cafePayableVal, icon: CreditCard, color: 'text-emerald-600', bg: 'bg-emerald-50 border-emerald-200' },
     { name: 'Event Manager Payable', value: eventPayableVal, icon: CreditCard, color: 'text-purple-600', bg: 'bg-purple-50 border-purple-200' },
@@ -108,7 +112,7 @@ export default function RevenueDashboard() {
       </div>
 
       {/* Top Metrics Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat, index) => (
           <div key={index} className="bg-fahara-surface p-5 rounded-2xl border border-fahara-border shadow-xs hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-3">

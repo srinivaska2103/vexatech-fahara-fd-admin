@@ -14,8 +14,8 @@ export function middleware(request) {
     return NextResponse.next();
   }
 
-  // Check for access token
-  const token = request.cookies.get('adminAccessToken')?.value;
+  // Check for access token or refresh token
+  const token = request.cookies.get('adminAccessToken')?.value || request.cookies.get('adminRefreshToken')?.value;
 
   if (!token) {
     return NextResponse.redirect(new URL('/admin/login', request.url));
