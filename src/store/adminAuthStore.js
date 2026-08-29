@@ -1,28 +1,39 @@
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import Cookies from 'js-cookie';
 
-export const useAdminAuthStore = create((set, get) => ({
-  user: null,
-  isAuthenticated: false,
-  isInitialized: false,
+export const useAdminAuthStore = create(
+  persist(
+    (set, get) => ({
+      user: null,
+      isAuthenticated: false,
+      isInitialized: false,
 
-  setUser: (user) => {
-    // Strictly enforce ADMIN role
-    if (user?.role !== 'ADMIN') {
-      get().logout();
-      throw new Error('Unauthorized access. Admin privileges required.');
+      setUser: (userData) => {
+        if (!userData) return;
+        const role = (userData.role || userData.roles?.name || '').toUpperCase();
+        if (role !== 'ADMIN') {
+          get().logout();
+          throw new Error('Unauthorized access. Admin privileges required.');
+        }
+        const formattedUser = { ...userData, role: 'ADMIN' };
+        set({ user: formattedUser, isAuthenticated: true, isInitialized: true });
+      },
+
+      setInitialized: (status) => set({ isInitialized: status }),
+
+      logout: () => {
+        Cookies.remove('adminAccessToken', { path: '/' });
+        Cookies.remove('adminRefreshToken', { path: '/' });
+        set({ user: null, isAuthenticated: false, isInitialized: true });
+        if (typeof window !== 'undefined') {
+          window.location.href = '/admin/login';
+        }
+      }
+    }),
+    {
+      name: 'admin-auth-storage',
+      storage: createJSONStorage(() => localStorage),
     }
-    set({ user, isAuthenticated: true });
-  },
-
-  setInitialized: (status) => set({ isInitialized: status }),
-
-  logout: () => {
-    Cookies.remove('adminAccessToken', { path: '/' });
-    Cookies.remove('adminRefreshToken', { path: '/' });
-    set({ user: null, isAuthenticated: false });
-    if (typeof window !== 'undefined') {
-      window.location.href = '/admin/login';
-    }
-  }
-}));
+  )
+);

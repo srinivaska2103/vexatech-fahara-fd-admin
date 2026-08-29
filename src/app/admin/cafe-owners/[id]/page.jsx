@@ -150,14 +150,14 @@ export default function CafeOwnerDetails() {
               </div>
               <div>
                 <p className="text-[10px] text-fahara-secondary font-bold uppercase tracking-wider mb-1">Account Number</p>
-                <p className="font-mono text-fahara-text font-bold">{owner.account_number || 'XXXX-XXXX-XXXX-5971'}</p>
+                <p className="font-mono text-fahara-text font-bold">{owner.account_number || 'Not Configured'}</p>
                 <p className="text-[10px] text-emerald-600 font-semibold mt-1 flex items-center gap-1">
                   <ShieldCheck className="w-3 h-3 text-emerald-600" /> Securely encrypted
                 </p>
               </div>
               <div>
                 <p className="text-[10px] text-fahara-secondary font-bold uppercase tracking-wider mb-1">IFSC Code</p>
-                <p className="font-mono text-fahara-text font-bold">{owner.ifsc_code || 'HDFC0007337'}</p>
+                <p className="font-mono text-fahara-text font-bold">{owner.ifsc_code || 'Not Configured'}</p>
               </div>
               {owner.upi_id && (
                 <div>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   LayoutDashboard, BarChart3, Activity, Users, UserCheck, CalendarDays, 
   ShieldCheck, Coffee, CheckCircle2, Star, Grid, Sparkles, Tags, 
@@ -10,11 +11,42 @@ import {
   Wallet, RotateCcw, Receipt, Building2, Landmark, Clock, History, 
   BadgeCheck, Bell, Mail, MessageCircle, Megaphone, TrendingUp, FileSpreadsheet, 
   Download, Settings, Percent, FileText, BellRing, Lock, Sliders, LifeBuoy, 
-  ShieldAlert, Cpu, Shield, User, HelpCircle, LogOut, X, ChevronRight,
-  ChevronsUpDown, Layers
+  ShieldAlert, Cpu, Shield, User, HelpCircle, LogOut, X, ChevronRight, ChevronDown,
+  ChevronsUpDown, Layers, CornerDownRight
 } from 'lucide-react';
 import { useAdminAuthStore } from '@/store/adminAuthStore';
 import api from '@/lib/axios';
+
+const getItemIconColors = (href, name) => {
+  if (href.includes('dashboard')) return 'bg-amber-100/90 text-amber-700 border-amber-200/70';
+  if (href.includes('analytics') || href.includes('reports?view=analytics')) return 'bg-purple-100/90 text-purple-700 border-purple-200/70';
+  if (href.includes('audit-logs')) return 'bg-slate-100/90 text-slate-700 border-slate-200/70';
+  
+  if (href.includes('customers')) return 'bg-sky-100/90 text-sky-700 border-sky-200/70';
+  if (href.includes('cafe-owners')) return 'bg-blue-100/90 text-blue-700 border-blue-200/70';
+  if (href.includes('event-managers')) return 'bg-teal-100/90 text-teal-700 border-teal-200/70';
+  if (name.includes('Admin')) return 'bg-rose-100/90 text-rose-700 border-rose-200/70';
+  
+  if (href.includes('cafes') || href.includes('cafe')) return 'bg-indigo-100/90 text-indigo-700 border-indigo-200/70';
+  if (href.includes('events') || href.includes('event')) return 'bg-cyan-100/90 text-cyan-700 border-cyan-200/70';
+  if (href.includes('reviews')) return 'bg-amber-100/90 text-amber-600 border-amber-200/70';
+  if (href.includes('categories')) return 'bg-violet-100/90 text-violet-700 border-violet-200/70';
+  
+  if (href.includes('bookings')) return 'bg-emerald-100/90 text-emerald-700 border-emerald-200/70';
+  if (href.includes('refunds')) return 'bg-rose-100/90 text-rose-700 border-rose-200/70';
+  if (href.includes('disputes')) return 'bg-orange-100/90 text-orange-700 border-orange-200/70';
+  
+  if (href.includes('payments')) return 'bg-emerald-100/90 text-emerald-800 border-emerald-200/70';
+  if (href.includes('payouts')) return 'bg-emerald-100/90 text-emerald-800 border-emerald-200/70';
+  if (href.includes('transactions')) return 'bg-blue-100/90 text-blue-700 border-blue-200/70';
+  if (href.includes('payout-accounts')) return 'bg-amber-100/90 text-amber-800 border-amber-200/70';
+  
+  if (href.includes('verifications')) return 'bg-amber-100/90 text-amber-700 border-amber-200/70';
+  if (href.includes('notifications')) return 'bg-rose-100/90 text-rose-700 border-rose-200/70';
+  if (href.includes('revenue')) return 'bg-emerald-100/90 text-emerald-700 border-emerald-200/70';
+  
+  return 'bg-stone-100 text-stone-700 border-stone-200/70';
+};
 
 const navigationGroups = [
   {
@@ -138,7 +170,8 @@ function SidebarContent({ isMobileOpen, onCloseMobile }) {
         try {
           const res = await api.get('/users/profile');
           if (res.data?.data) {
-            setUser({ ...user, ...res.data.data });
+            const profile = res.data.data;
+            setUser({ ...user, ...profile, role: profile.roles?.name || profile.role || 'ADMIN' });
           }
         } catch (err) {
           // Silent fallback
@@ -208,15 +241,15 @@ function SidebarContent({ isMobileOpen, onCloseMobile }) {
   };
 
   return (
-    <div className="flex h-full flex-col bg-fahara-surface border-r border-fahara-border shadow-xs select-none overflow-x-hidden">
+    <div className="flex h-full flex-col bg-white border-r border-[#E8DED5] shadow-xs select-none overflow-x-hidden">
       {/* Brand Header */}
-      <div className="flex items-center justify-between border-b border-fahara-border px-5 py-4 flex-shrink-0">
+      <div className="flex items-center justify-between border-b border-[#E8DED5] px-5 py-4 flex-shrink-0 bg-[#FFF8F0]/50">
         <Link 
           href="/admin/dashboard" 
           onClick={onCloseMobile}
           className="flex items-center gap-3 group"
         >
-          <div className="relative h-10 w-10 overflow-hidden rounded-xl border border-fahara-border bg-fahara-background shadow-xs transition-transform group-hover:scale-105">
+          <div className="relative h-10 w-10 overflow-hidden rounded-2xl border border-[#DDB892]/60 bg-white shadow-xs transition-transform group-hover:scale-105">
             <img 
               src="/Fahara Logo.jpeg" 
               alt="Fahara Logo" 
@@ -225,27 +258,27 @@ function SidebarContent({ isMobileOpen, onCloseMobile }) {
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
-              <span className="text-base font-extrabold tracking-tight text-fahara-text">Fahara</span>
-              <span className="rounded-full bg-fahara-primary/10 px-2 py-0.5 text-[9px] font-bold text-fahara-primary uppercase tracking-wider border border-fahara-primary/20">
+              <span className="text-base font-black tracking-tight text-[#2C1810]">Fahara</span>
+              <span className="rounded-full bg-[#6F4E37]/10 px-2 py-0.5 text-[9px] font-extrabold text-[#6F4E37] uppercase tracking-wider border border-[#6F4E37]/20">
                 Admin
               </span>
             </div>
-            <span className="text-[11px] font-medium text-fahara-secondary">Management Suite</span>
+            <span className="text-[11px] font-bold text-stone-500">Management Suite</span>
           </div>
         </Link>
         <button
           onClick={onCloseMobile}
-          className="rounded-xl p-1.5 text-fahara-secondary hover:bg-fahara-background hover:text-fahara-text md:hidden transition-colors"
+          className="rounded-xl p-1.5 text-stone-500 hover:bg-[#FFF8F0] hover:text-[#2C1810] md:hidden transition-colors"
         >
           <X className="h-5 w-5" />
         </button>
       </div>
 
-      <div className="flex items-center justify-between px-4 py-2 bg-fahara-background/70 border-b border-fahara-border/60 text-[10px] font-semibold text-fahara-secondary">
+      <div className="flex items-center justify-between px-4 py-2 bg-[#FFF8F0]/70 border-b border-[#E8DED5] text-[10px] font-extrabold text-[#6F4E37]">
         <span>MENU CATEGORIES</span>
         <button 
           onClick={toggleExpandAll}
-          className="flex items-center gap-1 hover:text-fahara-primary transition-colors cursor-pointer"
+          className="flex items-center gap-1 hover:text-[#2C1810] transition-colors cursor-pointer"
           title="Toggle Expand All"
         >
           <ChevronsUpDown className="h-3 w-3" />
@@ -254,24 +287,23 @@ function SidebarContent({ isMobileOpen, onCloseMobile }) {
       </div>
 
       {/* Navigation Accordion Groups */}
-      <div className="flex-1 overflow-y-auto px-3 py-3 space-y-2 scrollbar-thin scrollbar-thumb-fahara-border">
+      <div className="flex-1 overflow-y-auto px-3 py-3 space-y-2.5 custom-scrollbar">
         {navigationGroups.map((group) => {
-          const GroupIcon = group.icon;
           const isOpen = !!openSections[group.id];
           const hasActiveChild = group.id === activeInfo.groupId;
 
           return (
-            <div key={group.id} className="rounded-xl transition-all">
+            <div key={group.id} className="rounded-2xl transition-all">
+              {/* Simple, clean flat category header */}
               <button
                 onClick={() => toggleSection(group.id)}
-                className={`w-full flex items-center justify-between px-3 py-2 text-[11px] font-bold uppercase tracking-wider rounded-xl transition-all duration-150 cursor-pointer ${
+                className={`w-full flex items-center justify-between px-2.5 py-1.5 text-[11px] font-extrabold uppercase tracking-wider rounded-xl transition-all duration-150 cursor-pointer ${
                   hasActiveChild 
-                    ? 'text-fahara-primary bg-fahara-primary/10 font-black' 
-                    : 'text-fahara-secondary hover:text-fahara-text hover:bg-fahara-background'
+                    ? 'text-[#6F4E37] font-black bg-[#FFF8F0]' 
+                    : 'text-stone-500 hover:text-[#2C1810] hover:bg-[#FFF8F0]/60'
                 }`}
               >
                 <div className="flex items-center gap-2">
-                  <GroupIcon className={`h-4 w-4 transition-colors ${hasActiveChild ? 'text-fahara-primary' : 'text-fahara-secondary'}`} />
                   <span className="truncate">{group.title}</span>
                   {group.badge && (
                     <span className="px-1.5 py-0.2 text-[9px] font-extrabold bg-amber-500 text-white rounded-full">
@@ -279,40 +311,55 @@ function SidebarContent({ isMobileOpen, onCloseMobile }) {
                     </span>
                   )}
                 </div>
-                <ChevronRight 
-                  className={`h-3.5 w-3.5 text-fahara-secondary/70 transition-transform duration-200 ${
-                    isOpen ? 'rotate-90 text-fahara-primary' : ''
-                  }`} 
-                />
+                <ChevronRight className={`w-3.5 h-3.5 text-stone-400 transition-transform duration-200 ${isOpen ? 'rotate-90 text-[#6F4E37]' : ''}`} />
               </button>
 
-              {isOpen && (
-                <div className="mt-1 ml-3 border-l-2 border-fahara-border/70 pl-2.5 space-y-1">
-                  {group.items.map((item) => {
-                    const isActive = group.id === activeInfo.groupId && item.name === activeInfo.itemName;
-                    const ItemIcon = item.icon;
-                    return (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        onClick={onCloseMobile}
-                        className={`group relative flex items-center rounded-xl px-3 py-2 text-xs transition-all duration-150 ${
-                          isActive
-                            ? 'bg-fahara-primary text-white font-extrabold shadow-sm translate-x-0.5'
-                            : 'text-fahara-text/75 font-medium hover:bg-fahara-background hover:text-fahara-text hover:translate-x-1'
-                        }`}
-                      >
-                        <ItemIcon
-                          className={`mr-2.5 h-3.5 w-3.5 flex-shrink-0 transition-colors ${
-                            isActive ? 'text-white' : 'text-fahara-secondary group-hover:text-fahara-text'
-                          }`}
-                        />
-                        <span className="truncate flex-1">{item.name}</span>
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
+              {/* Sublinks with smooth motion height expansion */}
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.22, ease: 'easeInOut' }}
+                    className="overflow-hidden"
+                  >
+                    <div className="mt-1.5 ml-4 border-l border-[#E8DED5] pl-2.5 space-y-1 my-1.5">
+                      {group.items.map((item) => {
+                        const isActive = group.id === activeInfo.groupId && item.name === activeInfo.itemName;
+                        const ItemIcon = item.icon;
+                        const iconStyle = getItemIconColors(item.href, item.name);
+
+                        return (
+                          <motion.div key={item.name} whileHover={{ x: 2 }} whileTap={{ scale: 0.97 }}>
+                            <Link
+                              href={item.href}
+                              onClick={onCloseMobile}
+                              className={`group relative flex items-center rounded-2xl px-2.5 py-1.5 transition-all duration-200 cursor-pointer ${
+                                isActive
+                                  ? 'bg-[#FFF5EA] text-[#4A2C11] font-black border border-[#DDB892]/60 shadow-2xs translate-x-0.5'
+                                  : 'text-[#2C1810]/85 font-extrabold hover:bg-[#FFF8F0]/80 hover:text-[#4A2C11] hover:translate-x-0.5'
+                              }`}
+                            >
+                              {/* Branch Guide Arrow ↳ */}
+                              <CornerDownRight className="w-3 h-3 text-stone-300 stroke-[2] shrink-0 mr-1.5 group-hover:text-[#6F4E37] transition-colors" />
+
+                              {/* Signature Colored Icon Badge */}
+                              <div className={`w-7 h-7 rounded-xl flex items-center justify-center shrink-0 mr-2 border shadow-2xs transition-transform group-hover:scale-110 ${iconStyle}`}>
+                                <ItemIcon className="w-3.5 h-3.5" />
+                              </div>
+
+                              <span className="truncate flex-1 text-[11px] font-extrabold">{item.name}</span>
+
+                              <ChevronRight className="w-3 h-3 text-[#6F4E37] opacity-0 group-hover:opacity-100 transition-opacity ml-1" />
+                            </Link>
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           );
         })}
