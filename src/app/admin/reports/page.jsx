@@ -126,7 +126,7 @@ function ReportsContent() {
         })) || [];
         
         secondaryChartData = [
-          { name: 'Fahara Platform Fee', value: Number(summaryData.fahara_revenue || 0) },
+          { name: 'Platform Fee', value: Number(summaryData.fahara_revenue || 0) },
           { name: 'Cafe / Event Partners', value: Math.max(0, Number(summaryData.total_revenue || 0) - Number(summaryData.fahara_revenue || 0)) }
         ];
 
