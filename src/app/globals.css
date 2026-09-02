@@ -1,6 +1,12 @@
 @import "tailwindcss";
 
 @theme {
+  --breakpoint-xs: 360px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+
   --color-fahara-primary: #6F4E37;
   --color-fahara-secondary: #A67B5B;
   --color-fahara-accent: #DDB892;
@@ -13,6 +19,11 @@
 :root {
   --background: #FFF8F0;
   --foreground: #2C1810;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
