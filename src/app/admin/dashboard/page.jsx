@@ -12,6 +12,7 @@ import {
 import api from '@/lib/axios';
 import { useAdminAuthStore } from '@/store/adminAuthStore';
 import { KPICards } from './components/KPICards';
+import { CustomSelect } from '@/components/ui/CustomSelect';
 import dynamic from 'next/dynamic';
 
 const DashboardCharts = dynamic(() => import('./components/DashboardCharts').then(mod => mod.DashboardCharts), {
@@ -250,19 +251,18 @@ export default function AdminDashboard() {
           {/* Time Range Selector */}
           <div className="flex items-center gap-2">
             <span className="text-fahara-secondary font-semibold">Time Horizon:</span>
-            <div className="relative">
-              <select 
-                value={period}
-                onChange={(e) => setPeriod(e.target.value)}
-                className="h-8 rounded-xl border border-fahara-border bg-fahara-surface px-3 pr-7 text-xs font-semibold text-fahara-text focus:border-fahara-primary focus:outline-none focus:ring-2 focus:ring-fahara-accent/40 shadow-2xs cursor-pointer"
-              >
-                <option value="today">Today</option>
-                <option value="7d">Last 7 Days</option>
-                <option value="30d">Last 30 Days</option>
-                <option value="this_month">This Month</option>
-                <option value="this_year">This Year</option>
-              </select>
-            </div>
+            <CustomSelect
+              options={[
+                { value: 'today', label: 'Today' },
+                { value: '7d', label: 'Last 7 Days' },
+                { value: '30d', label: 'Last 30 Days' },
+                { value: 'this_month', label: 'This Month' },
+                { value: 'this_year', label: 'This Year' },
+              ]}
+              value={period}
+              onChange={(val) => setPeriod(val)}
+              className="min-w-[140px]"
+            />
           </div>
         </div>
       </div>

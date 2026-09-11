@@ -370,11 +370,14 @@ function EventManagersContent() {
                           <div className="pt-3 border-t border-fahara-border/60 space-y-1.5">
                             <span className="text-[10px] font-bold uppercase tracking-wider text-fahara-secondary block">Inclusions</span>
                             <div className="flex flex-wrap gap-1.5">
-                              {pkg.inclusions.slice(0, 4).map((inc, iIdx) => (
-                                <span key={iIdx} className="px-2 py-0.5 bg-fahara-background border border-fahara-border rounded-md text-[10px] font-semibold text-fahara-text">
-                                  {inc}
-                                </span>
-                              ))}
+                              {pkg.inclusions.slice(0, 4).map((inc, iIdx) => {
+                                const name = typeof inc === 'string' ? inc : (inc?.name || inc?.item_name || inc?.title || inc?.category || 'Feature');
+                                return (
+                                  <span key={iIdx} className="px-2 py-0.5 bg-fahara-background border border-fahara-border rounded-md text-[10px] font-semibold text-fahara-text">
+                                    {name}
+                                  </span>
+                                );
+                              })}
                             </div>
                           </div>
                         )}

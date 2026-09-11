@@ -385,11 +385,14 @@ export default function EventManagerDetails() {
                         <p className="text-[10px] text-fahara-secondary uppercase tracking-wider mb-2 font-bold">Package Inclusions</p>
                         <div className="flex flex-wrap gap-1.5">
                           {Array.isArray(service.inclusions) ? (
-                            service.inclusions.map((item, index) => (
-                              <span key={index} className="px-2.5 py-0.5 bg-fahara-background border border-fahara-border rounded-md text-[10px] font-semibold text-fahara-text capitalize">
-                                {item}
-                              </span>
-                            ))
+                            service.inclusions.map((item, index) => {
+                              const name = typeof item === 'string' ? item : (item?.name || item?.item_name || item?.title || item?.category || 'Inclusion');
+                              return (
+                                <span key={index} className="px-2.5 py-0.5 bg-fahara-background border border-fahara-border rounded-md text-[10px] font-semibold text-fahara-text capitalize">
+                                  {name}
+                                </span>
+                              );
+                            })
                           ) : (
                             Object.entries(service.inclusions).map(([key, value]) => {
                               if (value === true) return <span key={key} className="px-2.5 py-0.5 bg-fahara-background border border-fahara-border rounded-md text-[10px] font-semibold text-fahara-text capitalize">{key.replace(/_/g, ' ')}</span>;

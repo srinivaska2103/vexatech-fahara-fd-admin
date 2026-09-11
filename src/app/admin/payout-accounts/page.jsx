@@ -250,7 +250,7 @@ export default function PayoutAccountsList() {
                           account.partnerType === 'CAFE_OWNER' ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-purple-50 text-purple-700 border border-purple-200'
                         }`}>
                           {account.partnerType === 'CAFE_OWNER' ? <Building className="w-3 h-3" /> : <User className="w-3 h-3" />}
-                          <span>{account.partnerType.replace('_', ' ')}</span>
+                          <span>{(account.partnerType || 'PARTNER').replace(/_/g, ' ')}</span>
                         </span>
                       </td>
                       <td className="px-6 py-4">

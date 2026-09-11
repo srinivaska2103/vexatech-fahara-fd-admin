@@ -7,6 +7,7 @@ import { Search, Filter, CalendarDays, Eye, Loader2, Calendar, CheckCircle2, Clo
 import { format } from 'date-fns';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { CustomSelect } from '@/components/ui/CustomSelect';
 
 export default function AdminBookingsPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -121,19 +122,20 @@ export default function AdminBookingsPage() {
           />
         </div>
         <div className="flex items-center gap-2 w-full md:w-auto">
-          <Filter className="w-4 h-4 text-fahara-secondary" />
-          <select 
-            className="w-full md:w-auto bg-fahara-background border border-fahara-border rounded-xl px-3.5 py-2.5 text-xs font-semibold text-fahara-text focus:outline-none focus:ring-2 focus:ring-fahara-primary/40 cursor-pointer"
+          <CustomSelect
+            options={[
+              { value: 'All', label: 'All Statuses' },
+              { value: 'PENDING', label: 'Pending' },
+              { value: 'CONFIRMED', label: 'Confirmed' },
+              { value: 'COMPLETED', label: 'Completed' },
+              { value: 'CANCELLED', label: 'Cancelled' },
+              { value: 'REJECTED', label: 'Rejected' },
+            ]}
             value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-          >
-            <option value="All">All Statuses</option>
-            <option value="PENDING">Pending</option>
-            <option value="CONFIRMED">Confirmed</option>
-            <option value="COMPLETED">Completed</option>
-            <option value="CANCELLED">Cancelled</option>
-            <option value="REJECTED">Rejected</option>
-          </select>
+            onChange={(val) => setStatusFilter(val)}
+            icon={Filter}
+            className="w-full md:w-auto min-w-[150px]"
+          />
         </div>
       </div>
 
