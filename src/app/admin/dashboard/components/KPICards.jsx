@@ -4,7 +4,7 @@ import React from 'react';
 import { 
   Users, Store, Tent, Calendar, CheckCircle2, XCircle, 
   DollarSign, Wallet, ArrowRightLeft, ShieldAlert, Coffee, 
-  TrendingUp, TrendingDown, Clock, ShieldCheck
+  TrendingUp, TrendingDown, Clock, ShieldCheck, Building2
 } from 'lucide-react';
 
 const formatCurrency = (amount) => {
@@ -116,7 +116,7 @@ export const KPICards = ({ summary }) => {
           <span className="text-xs text-fahara-secondary">Live Database Totals</span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
           <KPICard 
             title="Total Customers" 
             value={summary.new_customers || 0} 
@@ -137,6 +137,13 @@ export const KPICards = ({ summary }) => {
             icon={Coffee} 
             colorScheme="primary"
             subtitle="Active Listed Venues"
+          />
+          <KPICard 
+            title="Restaurants" 
+            value={summary.total_restaurants || 0} 
+            icon={Building2} 
+            colorScheme="amber"
+            subtitle="Partner Restaurants"
           />
           <KPICard 
             title="Event Managers" 

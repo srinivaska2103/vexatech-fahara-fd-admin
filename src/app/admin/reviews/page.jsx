@@ -14,13 +14,14 @@ function ReviewsContent() {
   const queryClient = useQueryClient();
 
   const typeParam = searchParams.get('type');
-  const [activeTab, setActiveTab] = useState(typeParam === 'events' ? 'events' : typeParam === 'cafes' ? 'cafes' : 'all');
+  const [activeTab, setActiveTab] = useState(typeParam === 'events' ? 'events' : typeParam === 'restaurants' ? 'restaurants' : typeParam === 'cafes' ? 'cafes' : 'all');
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
   const [actionConfirm, setActionConfirm] = useState(null);
 
   useEffect(() => {
     if (typeParam === 'events') setActiveTab('events');
+    else if (typeParam === 'restaurants') setActiveTab('restaurants');
     else if (typeParam === 'cafes') setActiveTab('cafes');
     else setActiveTab('all');
   }, [typeParam]);
@@ -59,10 +60,15 @@ function ReviewsContent() {
   });
 
   const filteredReviews = reviews?.filter(r => {
-    // 1. Type Filter (Cafes vs Events)
+    // 1. Type Filter (Cafes vs Restaurants vs Events)
     if (activeTab === 'events') {
       const isEvent = r.business?.type === 'EVENT' || r.event_service_id || r.type === 'EVENT';
       if (!isEvent) return false;
+    } else if (activeTab === 'restaurants') {
+      const cat = (r.cafes?.category || r.business?.category || r.category || '').toLowerCase();
+      const role = (r.cafes?.users?.roles?.name || r.business?.owner_role || '').toUpperCase();
+      const isRestaurant = role === 'RESTAURANT_OWNER' || cat.includes('restaurant') || cat.includes('bistro') || cat.includes('dining');
+      if (!isRestaurant) return false;
     } else if (activeTab === 'cafes') {
       const isCafe = r.business?.type === 'CAFE' || r.cafe_id || r.type === 'CAFE';
       if (!isCafe) return false;

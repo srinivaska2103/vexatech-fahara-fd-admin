@@ -47,6 +47,7 @@ export default function AdminHeader() {
         {/* Quick Actions Popover Button (Mobile & Desktop) */}
         <div ref={dropdownRef} className="relative">
           <button
+            suppressHydrationWarning
             onClick={() => setIsQuickActionsOpen(!isQuickActionsOpen)}
             className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-fahara-primary text-white text-xs font-bold rounded-xl hover:bg-fahara-primary/90 transition-all cursor-pointer shadow-2xs"
           >
@@ -125,6 +126,7 @@ export default function AdminHeader() {
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-fahara-secondary" />
             <input
               type="text"
+              suppressHydrationWarning
               placeholder="Search cafes, bookings, users..."
               className="h-9 w-full rounded-xl border border-fahara-border bg-fahara-background pl-9 pr-4 text-xs text-fahara-text placeholder-fahara-secondary/60 focus:border-fahara-primary focus:bg-fahara-surface focus:outline-none focus:ring-2 focus:ring-fahara-accent/40 transition-all"
             />

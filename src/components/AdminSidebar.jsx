@@ -28,6 +28,7 @@ const getItemIconColors = (href, name) => {
   if (name.includes('Admin')) return 'bg-rose-100/90 text-rose-700 border-rose-200/70';
   
   if (href.includes('cafes') || href.includes('cafe')) return 'bg-indigo-100/90 text-indigo-700 border-indigo-200/70';
+  if (href.includes('restaurants') || href.includes('restaurant')) return 'bg-orange-100/90 text-orange-700 border-orange-200/70';
   if (href.includes('events') || href.includes('event')) return 'bg-cyan-100/90 text-cyan-700 border-cyan-200/70';
   if (href.includes('reviews')) return 'bg-amber-100/90 text-amber-600 border-amber-200/70';
   if (href.includes('categories')) return 'bg-violet-100/90 text-violet-700 border-violet-200/70';
@@ -79,6 +80,16 @@ const navigationGroups = [
       { name: 'Cafe Verification', href: '/admin/verifications?tab=cafes', icon: CheckCircle2 },
       { name: 'Cafe Reviews', href: '/admin/reviews?type=cafes', icon: Star },
       { name: 'Categories & Amenities', href: '/admin/settings?tab=categories', icon: Grid },
+    ]
+  },
+  {
+    id: 'restaurants',
+    title: 'RESTAURANT MANAGEMENT',
+    icon: Building2,
+    items: [
+      { name: 'All Restaurants', href: '/admin/restaurants', icon: Building2 },
+      { name: 'Restaurant Verification', href: '/admin/verifications?tab=restaurants', icon: CheckCircle2 },
+      { name: 'Restaurant Reviews', href: '/admin/reviews?type=restaurants', icon: Star },
     ]
   },
   {
@@ -277,6 +288,7 @@ function SidebarContent({ isMobileOpen, onCloseMobile }) {
       <div className="flex items-center justify-between px-4 py-2 bg-[#FFF8F0]/70 border-b border-[#E8DED5] text-[10px] font-extrabold text-[#6F4E37]">
         <span>MENU CATEGORIES</span>
         <button 
+          suppressHydrationWarning
           onClick={toggleExpandAll}
           className="flex items-center gap-1 hover:text-[#2C1810] transition-colors cursor-pointer"
           title="Toggle Expand All"
@@ -296,6 +308,7 @@ function SidebarContent({ isMobileOpen, onCloseMobile }) {
             <div key={group.id} className="rounded-2xl transition-all">
               {/* Simple, clean flat category header */}
               <button
+                suppressHydrationWarning
                 onClick={() => toggleSection(group.id)}
                 className={`w-full flex items-center justify-between px-2.5 py-1.5 text-[11px] font-extrabold uppercase tracking-wider rounded-xl transition-all duration-150 cursor-pointer ${
                   hasActiveChild 

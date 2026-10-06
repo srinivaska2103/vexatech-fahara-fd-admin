@@ -13,6 +13,7 @@ import { motion } from 'framer-motion';
 
 const TABS = [
   { id: 'cafes', label: 'Cafes Directory' },
+  { id: 'restaurants', label: 'Restaurant Partners' },
   { id: 'event_managers', label: 'Event Managers' },
   { id: 'cafe_owners', label: 'Cafe Owners' }
 ];
@@ -66,6 +67,29 @@ function VerificationsContent() {
             verified: user.status === 'ACTIVE'
           },
           documents: [{ name: 'Identity & Business Document', type: 'Owner Verification' }],
+          history: []
+        }));
+      } else if (activeTab === 'restaurants') {
+        const res = await api.get('/cafes?admin=true');
+        const itemsList = res.data?.data || res.data || [];
+        const restOnly = itemsList.filter(c => {
+          const cat = (c.category || '').toLowerCase();
+          const role = (c.users?.roles?.name || c.users?.user_type || '').toUpperCase();
+          return role === 'RESTAURANT_OWNER' || cat.includes('restaurant') || cat.includes('bistro') || cat.includes('dining');
+        });
+        const finalRestaurants = restOnly.length > 0 ? restOnly : itemsList;
+        data = finalRestaurants.map(r => ({
+          id: r.id,
+          type: 'restaurants',
+          status: r.status || 'PENDING',
+          businessName: r.name,
+          ownerName: r.users?.name || 'Restaurant Owner',
+          email: r.users?.email || 'N/A',
+          phone: r.users?.phone || r.phone || 'N/A',
+          address: r.address || r.city || 'N/A',
+          submittedDate: r.created_at || new Date().toISOString(),
+          bankDetails: { bankName: 'Razorpay Linked Account', accountLast4: 'XXXX', verified: r.status === 'APPROVED' },
+          documents: [{ name: 'Restaurant License & FSSAI Document', type: 'Food Safety License' }],
           history: []
         }));
       } else if (activeTab === 'cafes') {
