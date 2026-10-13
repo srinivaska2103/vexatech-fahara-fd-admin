@@ -114,11 +114,25 @@ const navigationGroups = [
     ]
   },
   {
+    id: 'subscriptions',
+    title: 'SUBSCRIPTION MANAGEMENT',
+    icon: Sparkles,
+    items: [
+      { name: 'Overview', href: '/admin/subscriptions', icon: LayoutDashboard },
+      { name: 'Subscription Plans', href: '/admin/subscriptions/plans', icon: Sparkles },
+      { name: 'Cafe Subscriptions', href: '/admin/subscriptions/cafes', icon: Coffee },
+      { name: 'Restaurant Subscriptions', href: '/admin/subscriptions/restaurants', icon: Building2 },
+      { name: 'Event Manager Subscriptions', href: '/admin/subscriptions/event-managers', icon: CalendarDays },
+      { name: 'Payment History', href: '/admin/subscriptions/payments', icon: CreditCard },
+    ]
+  },
+  {
     id: 'finance',
     title: 'FINANCE',
     icon: Wallet,
     items: [
       { name: 'Payments', href: '/admin/payments', icon: CreditCard },
+      { name: 'Partner Subscriptions', href: '/admin/subscriptions', icon: Sparkles },
       { name: 'Settlements', href: '/admin/payouts', icon: Wallet },
       { name: 'Refunds', href: '/admin/refunds', icon: RotateCcw },
       { name: 'Transactions', href: '/admin/transactions', icon: Receipt },
@@ -421,6 +435,7 @@ function SidebarContent({ isMobileOpen, onCloseMobile }) {
           </Link>
 
           <button
+            suppressHydrationWarning
             onClick={logout}
             className="flex h-8 w-8 items-center justify-center rounded-xl text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-colors cursor-pointer shrink-0 ml-1"
             title="Logout Admin"
