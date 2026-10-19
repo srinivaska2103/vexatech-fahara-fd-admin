@@ -17,7 +17,7 @@ const COLORFUL_CATEGORIES = [
   {
     id: 'overview',
     title: 'Overview',
-    bg: 'from-amber-500/15 to-orange-500/10 border-amber-500/30 text-amber-900',
+    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#E8DED5] text-[#2C1810]',
     icon: LayoutDashboard,
     items: [
       { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
@@ -26,9 +26,23 @@ const COLORFUL_CATEGORIES = [
     ]
   },
   {
+    id: 'subscriptions',
+    title: 'Subscription Management',
+    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#DDB892] text-[#6F4E37]',
+    icon: Sparkles,
+    items: [
+      { name: 'Overview', href: '/admin/subscriptions', icon: LayoutDashboard },
+      { name: 'Subscription Plans', href: '/admin/subscriptions/plans', icon: Sparkles },
+      { name: 'Cafe Subscriptions', href: '/admin/subscriptions/cafes', icon: Store },
+      { name: 'Restaurant Subscriptions', href: '/admin/subscriptions/restaurants', icon: Building2 },
+      { name: 'Event Subscriptions', href: '/admin/subscriptions/event-managers', icon: CalendarDays },
+      { name: 'Payment History', href: '/admin/subscriptions/payments', icon: CreditCard }
+    ]
+  },
+  {
     id: 'users',
     title: 'Users & Staff',
-    bg: 'from-blue-500/15 to-indigo-500/10 border-blue-500/30 text-blue-900',
+    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#E8DED5] text-[#2C1810]',
     icon: Users,
     items: [
       { name: 'Customers', href: '/admin/customers', icon: Users },
@@ -40,7 +54,7 @@ const COLORFUL_CATEGORIES = [
   {
     id: 'cafes',
     title: 'Cafes & Outlets',
-    bg: 'from-amber-700/15 to-yellow-600/10 border-amber-700/30 text-amber-950',
+    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#E8DED5] text-[#2C1810]',
     icon: Store,
     items: [
       { name: 'All Cafes', href: '/admin/cafes', icon: Store },
@@ -51,7 +65,7 @@ const COLORFUL_CATEGORIES = [
   {
     id: 'events',
     title: 'Events & Experiences',
-    bg: 'from-purple-500/15 to-pink-500/10 border-purple-500/30 text-purple-950',
+    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#E8DED5] text-[#2C1810]',
     icon: Sparkles,
     items: [
       { name: 'All Events', href: '/admin/event-managers?tab=packages', icon: Sparkles },
@@ -62,7 +76,7 @@ const COLORFUL_CATEGORIES = [
   {
     id: 'bookings',
     title: 'Bookings & Refunds',
-    bg: 'from-emerald-500/15 to-teal-500/10 border-emerald-500/30 text-emerald-950',
+    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#E8DED5] text-[#2C1810]',
     icon: CalendarCheck,
     items: [
       { name: 'All Bookings', href: '/admin/bookings', icon: CalendarCheck },
@@ -73,10 +87,11 @@ const COLORFUL_CATEGORIES = [
   {
     id: 'finance',
     title: 'Finance & Payouts',
-    bg: 'from-emerald-600/15 to-green-500/10 border-emerald-600/30 text-emerald-950',
+    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#E8DED5] text-[#2C1810]',
     icon: CreditCard,
     items: [
       { name: 'Payments', href: '/admin/payments', icon: CreditCard },
+      { name: 'Partner Subscriptions', href: '/admin/subscriptions', icon: Sparkles },
       { name: 'Settlements', href: '/admin/payouts', icon: Receipt },
       { name: 'Refunds', href: '/admin/refunds', icon: RotateCcw },
       { name: 'Razorpay Accounts', href: '/admin/payout-accounts', icon: Building2 }
@@ -85,7 +100,7 @@ const COLORFUL_CATEGORIES = [
   {
     id: 'communication',
     title: 'Communication',
-    bg: 'from-sky-500/15 to-cyan-500/10 border-sky-500/30 text-sky-950',
+    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#E8DED5] text-[#2C1810]',
     icon: Bell,
     items: [
       { name: 'Notifications', href: '/admin/notifications', icon: Bell },
@@ -95,7 +110,7 @@ const COLORFUL_CATEGORIES = [
   {
     id: 'system',
     title: 'System & Security',
-    bg: 'from-rose-500/15 to-red-500/10 border-rose-500/30 text-rose-950',
+    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#E8DED5] text-[#2C1810]',
     icon: Shield,
     items: [
       { name: 'Support & Tickets', href: '/admin/disputes?view=tickets', icon: LifeBuoy },
@@ -237,14 +252,16 @@ export default function MobileBottomNav() {
                   return (
                     <div 
                       key={category.id} 
-                      className={`bg-gradient-to-br ${category.bg} border rounded-2xl p-4 shadow-2xs space-y-2`}
+                      className={`bg-gradient-to-br ${category.bg} border rounded-2xl p-3.5 xs:p-4 shadow-2xs space-y-2`}
                     >
-                      <div className="flex items-center gap-2 border-b border-black/5 pb-2">
-                        <CategoryIcon className="w-4 h-4 font-bold" />
-                        <h4 className="text-xs font-extrabold uppercase tracking-wider">{category.title}</h4>
+                      <div className="flex items-center gap-2 border-b border-[#E8DED5] pb-2">
+                        <div className="w-5 h-5 rounded-lg bg-[#6F4E37]/10 flex items-center justify-center text-[#6F4E37]">
+                          <CategoryIcon className="w-3 h-3 xs:w-3.5 xs:h-3.5 font-bold" />
+                        </div>
+                        <h4 className="text-[11px] xs:text-xs font-black uppercase tracking-wider">{category.title}</h4>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-2 pt-1">
+                      <div className="grid grid-cols-2 gap-1.5 xs:gap-2 pt-1">
                         {category.items.map(item => {
                           const ItemIcon = item.icon;
                           const isActive = pathname === item.href;
@@ -253,13 +270,13 @@ export default function MobileBottomNav() {
                               key={item.name}
                               href={item.href}
                               onClick={() => setIsDrawerOpen(false)}
-                              className={`flex items-center gap-2 p-2.5 rounded-xl text-xs font-bold transition-all ${
+                              className={`flex items-center gap-1.5 xs:gap-2 p-2 xs:p-2.5 rounded-xl text-[11px] xs:text-xs font-bold transition-all ${
                                 isActive 
-                                  ? 'bg-fahara-primary text-white shadow-2xs' 
-                                  : 'bg-fahara-surface/80 hover:bg-fahara-surface text-fahara-text border border-fahara-border/50 shadow-2xs'
+                                  ? 'bg-[#6F4E37] text-white shadow-2xs' 
+                                  : 'bg-white hover:bg-[#FFF8F0] text-[#2C1810] border border-[#E8DED5] hover:border-[#6F4E37]/40 shadow-2xs'
                               }`}
                             >
-                              <ItemIcon className="w-3.5 h-3.5 shrink-0" />
+                              <ItemIcon className="w-3 h-3 xs:w-3.5 xs:h-3.5 shrink-0 text-[#6F4E37]" />
                               <span className="truncate">{item.name}</span>
                             </Link>
                           );
