@@ -1,9 +1,10 @@
 'use client';
 
+import FoodLoadingScreen from './FoodLoadingScreen';
 import React from 'react';
 
 /**
- * Fahara Skeleton Base with brand cream/amber tones
+ * Grab2GO Skeleton Base with brand cream/amber tones
  */
 export function Skeleton({ className = '', ...props }) {
   return (
@@ -20,7 +21,7 @@ export function Skeleton({ className = '', ...props }) {
  */
 export function StatCardSkeleton() {
   return (
-    <div className="bg-white p-5 rounded-2xl border border-[#E8DED5] shadow-2xs flex flex-col justify-between h-32 select-none">
+    <div className="bg-white p-5 rounded-2xl border border-[#FEE2E2] shadow-2xs flex flex-col justify-between h-32 select-none">
       <div className="flex justify-between items-start">
         <Skeleton className="w-10 h-10 rounded-xl" />
         <Skeleton className="w-16 h-6 rounded-full" />
@@ -39,7 +40,7 @@ export function StatCardSkeleton() {
 export function DashboardOverviewSkeleton({ statCount = 4 }) {
   return (
     <div className="space-y-6 select-none" aria-busy="true">
-      <div className="p-6 rounded-3xl bg-white border border-[#E8DED5] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="p-6 rounded-3xl bg-white border border-[#FEE2E2] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="space-y-2">
           <Skeleton className="h-7 w-48 rounded-lg" />
           <Skeleton className="h-4 w-72 rounded" />
@@ -57,14 +58,14 @@ export function DashboardOverviewSkeleton({ statCount = 4 }) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 p-6 rounded-3xl bg-white border border-[#E8DED5] space-y-4 min-h-[320px]">
+        <div className="lg:col-span-2 p-6 rounded-3xl bg-white border border-[#FEE2E2] space-y-4 min-h-[320px]">
           <div className="flex justify-between items-center">
             <Skeleton className="h-5 w-36 rounded" />
             <Skeleton className="h-8 w-24 rounded-lg" />
           </div>
           <Skeleton className="h-56 w-full rounded-2xl" />
         </div>
-        <div className="p-6 rounded-3xl bg-white border border-[#E8DED5] space-y-4 min-h-[320px]">
+        <div className="p-6 rounded-3xl bg-white border border-[#FEE2E2] space-y-4 min-h-[320px]">
           <Skeleton className="h-5 w-32 rounded" />
           <div className="space-y-3">
             {[1, 2, 3, 4].map(n => (
@@ -88,8 +89,8 @@ export function DashboardOverviewSkeleton({ statCount = 4 }) {
  */
 export function TableSkeleton({ rows = 6, cols = 5 }) {
   return (
-    <div className="w-full bg-white rounded-3xl border border-[#E8DED5] overflow-hidden select-none" aria-busy="true">
-      <div className="bg-[#FFF8F0] border-b border-[#E8DED5] px-6 py-4 flex gap-4">
+    <div className="w-full bg-white rounded-3xl border border-[#FEE2E2] overflow-hidden select-none" aria-busy="true">
+      <div className="bg-[#FFF5F5] border-b border-[#FEE2E2] px-6 py-4 flex gap-4">
         {Array.from({ length: cols }).map((_, i) => (
           <Skeleton key={i} className="h-4 flex-1 rounded" />
         ))}

@@ -90,7 +90,7 @@ export default function TransactionsPage() {
             </div>
           </div>
           <div className="text-2xl font-extrabold text-fahara-text mt-2">₹{totalFees.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-          <span className="text-[11px] text-amber-600 font-semibold mt-1 block">Fahara Service Commission</span>
+          <span className="text-[11px] text-amber-600 font-semibold mt-1 block">Grab2GO Service Commission</span>
         </div>
 
         <div className="bg-fahara-surface border border-fahara-border rounded-2xl p-5 shadow-xs">

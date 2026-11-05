@@ -6,7 +6,7 @@ import api from '@/lib/axios';
 import { useParams, useRouter } from 'next/navigation';
 import { 
   ArrowLeft, Mail, Phone, Calendar, Star, MapPin, Coffee, 
-  ArrowRightLeft, User, ShieldCheck, CreditCard, Clock, Loader2 
+  ArrowRightLeft, User, ShieldCheck, CreditCard, Clock, Loader2, ShoppingBag 
 } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -21,6 +21,15 @@ export default function CustomerDetails() {
     queryKey: ['adminCustomer', id],
     queryFn: async () => {
       const response = await api.get(`/customers/owner/${id}`);
+      return response.data.data;
+    }
+  });
+
+
+  const { data: foodOrders } = useQuery({
+    queryKey: ['adminCustomerFoodOrders', id],
+    queryFn: async () => {
+      const response = await api.get(`/customers/owner/${id}/orders`);
       return response.data.data;
     }
   });
@@ -161,6 +170,7 @@ export default function CustomerDetails() {
         <nav className="-mb-px flex space-x-6">
           {[
             { id: 'bookings', label: 'Bookings History', count: bookings?.length },
+            { id: 'food_orders', label: 'Food Order History', count: foodOrders?.length },
             { id: 'payments', label: 'Payments', count: payments?.length },
             { id: 'reviews', label: 'Reviews', count: reviews?.length }
           ].map((tab) => (
@@ -189,6 +199,83 @@ export default function CustomerDetails() {
       {/* Tab Panels */}
       <div className="bg-fahara-surface border border-fahara-border rounded-2xl overflow-hidden shadow-xs">
         
+        
+        {/* Food Orders Tab */}
+        {activeTab === 'food_orders' && (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs">
+              <thead>
+                <tr className="bg-fahara-background/80 border-b border-fahara-border text-fahara-secondary font-semibold uppercase tracking-wider text-[10px]">
+                  <th className="px-6 py-4">Order ID</th>
+                  <th className="px-6 py-4">Cafe / Restaurant</th>
+                  <th className="px-6 py-4">Ordered Items</th>
+                  <th className="px-6 py-4">Total Amount</th>
+                  <th className="px-6 py-4">Payment</th>
+                  <th className="px-6 py-4">Status</th>
+                  <th className="px-6 py-4">Date</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-fahara-border/60">
+                {(!foodOrders || foodOrders.length === 0) ? (
+                  <tr>
+                    <td colSpan="7" className="px-6 py-12 text-center text-fahara-secondary">
+                      No food order history found for this customer.
+                    </td>
+                  </tr>
+                ) : (
+                  foodOrders.map((order) => (
+                    <tr key={order.id} className="hover:bg-fahara-background/60 transition-colors">
+                      <td className="px-6 py-4 font-mono font-bold text-[#E50914]">
+                        #{order.order_number}
+                        <span className="block text-[10px] text-fahara-secondary font-sans font-normal capitalize">
+                          {order.order_type?.toLowerCase().replace('_', ' ')}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 font-bold text-fahara-text">
+                        {order.cafes?.name || 'Restaurant'}
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="font-semibold text-fahara-text block max-w-xs truncate">
+                          {order.order_items?.map(i => `${i.quantity}x ${i.item_name_snapshot}`).join(', ') || 'Food items'}
+                        </span>
+                        <span className="text-[10px] text-fahara-secondary">
+                          {order.order_items?.length || 0} items
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 font-mono font-black text-fahara-text">
+                        ₹{Number(order.total_amount || 0).toFixed(2)}
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className={`inline-flex px-2 py-0.5 rounded text-[9.5px] font-black uppercase tracking-wider ${
+                          order.payment_status === 'PAID'
+                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                            : 'bg-amber-50 text-amber-700 border border-amber-200'
+                        }`}>
+                          {order.payment_status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className={`inline-flex px-2 py-0.5 rounded-full text-[9.5px] font-black uppercase tracking-wider ${
+                          ['COMPLETED', 'DELIVERED'].includes(order.order_status)
+                            ? 'bg-emerald-100 text-emerald-800'
+                            : ['CANCELLED', 'REJECTED'].includes(order.order_status)
+                            ? 'bg-rose-100 text-rose-800'
+                            : 'bg-blue-100 text-blue-800'
+                        }`}>
+                          {order.order_status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-fahara-secondary text-[11px] whitespace-nowrap">
+                        {new Date(order.created_at).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
+
         {/* Bookings Tab */}
         {activeTab === 'bookings' && (
           <div className="overflow-x-auto">

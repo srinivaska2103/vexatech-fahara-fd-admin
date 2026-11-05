@@ -37,7 +37,7 @@ const DATE_RANGES = [
   { id: 'year', label: 'This Year' },
 ];
 
-const COLORS = ['#6F4E37', '#A67B5B', '#10b981', '#f59e0b', '#ef4444', '#3b82f6'];
+const COLORS = ['#E50914', '#B71C1C', '#10b981', '#f59e0b', '#ef4444', '#3b82f6'];
 
 function ReportsContent() {
   const searchParams = useSearchParams();
@@ -137,7 +137,7 @@ function ReportsContent() {
             trend: summaryData.revenue_trend || 0 
           },
           { 
-            label: 'Fahara Revenue', 
+            label: 'Grab2GO Revenue', 
             value: `₹${Number(summaryData.fahara_revenue || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, 
             trend: summaryData.revenue_trend || 0 
           },
@@ -266,15 +266,15 @@ function ReportsContent() {
           <AreaChart data={reportData.chartData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
             <defs>
               <linearGradient id="colorRevReport" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#6F4E37" stopOpacity={0.35}/>
-                <stop offset="95%" stopColor="#6F4E37" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#E50914" stopOpacity={0.35}/>
+                <stop offset="95%" stopColor="#E50914" stopOpacity={0}/>
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E8DED5" />
-            <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{fill: '#2C1810', fontSize: 11}} dy={10} />
-            <YAxis axisLine={false} tickLine={false} tick={{fill: '#2C1810', fontSize: 11}} tickFormatter={(value) => `₹${value}`} />
-            <RechartsTooltip contentStyle={{ borderRadius: '16px', border: '1px solid #E8DED5', backgroundColor: '#FFF8F0' }} />
-            <Area type="monotone" dataKey="amount" stroke="#6F4E37" strokeWidth={3} fillOpacity={1} fill="url(#colorRevReport)" />
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#FEE2E2" />
+            <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{fill: '#252525', fontSize: 11}} dy={10} />
+            <YAxis axisLine={false} tickLine={false} tick={{fill: '#252525', fontSize: 11}} tickFormatter={(value) => `₹${value}`} />
+            <RechartsTooltip contentStyle={{ borderRadius: '16px', border: '1px solid #FEE2E2', backgroundColor: '#FFF5F5' }} />
+            <Area type="monotone" dataKey="amount" stroke="#E50914" strokeWidth={3} fillOpacity={1} fill="url(#colorRevReport)" />
           </AreaChart>
         </ResponsiveContainer>
       );
@@ -284,11 +284,11 @@ function ReportsContent() {
       return (
         <ResponsiveContainer width="100%" height={320}>
           <BarChart data={reportData.chartData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E8DED5" />
-            <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{fill: '#2C1810', fontSize: 11}} dy={10} />
-            <YAxis axisLine={false} tickLine={false} tick={{fill: '#2C1810', fontSize: 11}} />
-            <RechartsTooltip cursor={{fill: '#FFF8F0'}} contentStyle={{ borderRadius: '16px', border: '1px solid #E8DED5', backgroundColor: '#FFF8F0' }} />
-            <Bar dataKey="total" fill="#6F4E37" radius={[6, 6, 0, 0]} name="Total Bookings" />
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#FEE2E2" />
+            <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{fill: '#252525', fontSize: 11}} dy={10} />
+            <YAxis axisLine={false} tickLine={false} tick={{fill: '#252525', fontSize: 11}} />
+            <RechartsTooltip cursor={{fill: '#FFF5F5'}} contentStyle={{ borderRadius: '16px', border: '1px solid #FEE2E2', backgroundColor: '#FFF5F5' }} />
+            <Bar dataKey="total" fill="#E50914" radius={[6, 6, 0, 0]} name="Total Bookings" />
             <Bar dataKey="completed" fill="#10b981" radius={[6, 6, 0, 0]} name="Completed" />
             <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '15px' }} />
           </BarChart>
@@ -299,11 +299,11 @@ function ReportsContent() {
     return (
       <ResponsiveContainer width="100%" height={320}>
         <LineChart data={reportData.chartData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E8DED5" />
-          <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{fill: '#2C1810', fontSize: 11}} dy={10} />
-          <YAxis axisLine={false} tickLine={false} tick={{fill: '#2C1810', fontSize: 11}} />
-          <RechartsTooltip contentStyle={{ borderRadius: '16px', border: '1px solid #E8DED5', backgroundColor: '#FFF8F0' }} />
-          <Line type="monotone" dataKey="count" stroke="#6F4E37" strokeWidth={3} dot={{r: 4}} activeDot={{r: 6}} />
+          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#FEE2E2" />
+          <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{fill: '#252525', fontSize: 11}} dy={10} />
+          <YAxis axisLine={false} tickLine={false} tick={{fill: '#252525', fontSize: 11}} />
+          <RechartsTooltip contentStyle={{ borderRadius: '16px', border: '1px solid #FEE2E2', backgroundColor: '#FFF5F5' }} />
+          <Line type="monotone" dataKey="count" stroke="#E50914" strokeWidth={3} dot={{r: 4}} activeDot={{r: 6}} />
         </LineChart>
       </ResponsiveContainer>
     );
@@ -332,7 +332,7 @@ function ReportsContent() {
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
-              <RechartsTooltip contentStyle={{ borderRadius: '16px', border: '1px solid #E8DED5', backgroundColor: '#FFF8F0' }} />
+              <RechartsTooltip contentStyle={{ borderRadius: '16px', border: '1px solid #FEE2E2', backgroundColor: '#FFF5F5' }} />
               <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
             </PieChart>
           </ResponsiveContainer>

@@ -20,6 +20,19 @@ export default function CafeDetails() {
   const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
   const [rejectionReason, setRejectionReason] = useState('');
 
+  // Food Performance Query for Admin Oversight
+  const { data: foodPerformance, isLoading: isFoodPerfLoading } = useQuery({
+    queryKey: ['adminCafeFoodPerf', id],
+    queryFn: async () => {
+      try {
+        const response = await api.get(`/admin/food/cafes/${id}/performance`);
+        return response.data?.data || null;
+      } catch (e) {
+        return null;
+      }
+    }
+  });
+
   const { data: cafe, isLoading, isError } = useQuery({
     queryKey: ['adminCafe', id],
     queryFn: async () => {
@@ -347,6 +360,77 @@ export default function CafeDetails() {
                 ))
               )}
             </div>
+          </div>
+          {/* Food Performance Overview */}
+          <div className="bg-fahara-surface border border-fahara-border rounded-2xl p-6 shadow-xs">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h3 className="text-sm font-bold text-fahara-text flex items-center gap-2">
+                  <Coffee className="w-4 h-4 text-fahara-primary" /> Food Ordering Performance
+                </h3>
+                <p className="text-xs text-fahara-secondary mt-0.5">Live platform performance and revenue metrics for this cafe's food operations.</p>
+              </div>
+              {foodPerformance?.performance && (
+                <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-xl">
+                  {foodPerformance.performance.totalOrders} total orders
+                </span>
+              )}
+            </div>
+
+            {isFoodPerfLoading ? (
+              <div className="py-6 text-center text-xs text-fahara-secondary flex items-center justify-center gap-2">
+                <Loader2 className="w-4 h-4 animate-spin text-fahara-primary" /> Loading food performance data...
+              </div>
+            ) : !foodPerformance?.performance ? (
+              <p className="text-fahara-secondary text-xs">No food order history recorded yet for this venue.</p>
+            ) : (
+              <div className="space-y-4">
+                {/* Metric Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div className="p-3 rounded-xl bg-stone-50 border border-stone-200/80">
+                    <span className="text-[10px] font-bold uppercase text-stone-500 block">Total Food Revenue</span>
+                    <span className="text-sm font-black text-stone-900 mt-1 block font-mono">
+                      ₹{Number(foodPerformance.performance.totalRevenue || 0).toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-stone-50 border border-stone-200/80">
+                    <span className="text-[10px] font-bold uppercase text-stone-500 block">Avg Order Value</span>
+                    <span className="text-sm font-black text-stone-900 mt-1 block font-mono">
+                      ₹{Number(foodPerformance.performance.averageOrderValue || 0).toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-stone-50 border border-stone-200/80">
+                    <span className="text-[10px] font-bold uppercase text-stone-500 block">Completed</span>
+                    <span className="text-sm font-black text-emerald-600 mt-1 block">
+                      {foodPerformance.performance.completedOrders || 0}
+                    </span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-stone-50 border border-stone-200/80">
+                    <span className="text-[10px] font-bold uppercase text-stone-500 block">Cancelled</span>
+                    <span className="text-sm font-black text-rose-600 mt-1 block">
+                      {foodPerformance.performance.cancelledOrders || 0}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Popular Item & Ratings */}
+                <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-stone-100 text-xs">
+                  <div className="flex items-center gap-2">
+                    <span className="text-stone-500">Most Popular Item:</span>
+                    <span className="font-bold text-stone-900 bg-amber-50 text-amber-900 border border-amber-200 px-2 py-0.5 rounded-lg">
+                      {foodPerformance.performance.mostPopularItem?.name || 'N/A'} ({foodPerformance.performance.mostPopularItem?.ordersCount || 0} ordered)
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-stone-500">Food Reviews:</span>
+                    <span className="font-bold text-stone-800 flex items-center gap-1">
+                      <Star size={13} className="text-amber-500 fill-amber-500" />
+                      {Number(foodPerformance.performance.customerReviews?.averageRating || 0).toFixed(1)} ({foodPerformance.performance.customerReviews?.totalReviews || 0} reviews)
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

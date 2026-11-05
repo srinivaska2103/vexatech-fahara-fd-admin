@@ -8,7 +8,8 @@ import {
   BadgeCheck, Bell, TrendingUp, Shield, ChevronRight, ArrowRight,
   UserCheck, CalendarDays, ShieldCheck, CheckCircle2, Tags, MessageSquare,
   FileX, AlertTriangle, RotateCcw, Receipt, Building2, Landmark,
-  Clock, History, Mail, LifeBuoy, ShieldAlert, Compass, LogOut, User
+  Clock, History, Mail, LifeBuoy, ShieldAlert, Compass, LogOut, User,
+  ShoppingBag, Star, Bike
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAdminAuthStore } from '@/store/adminAuthStore';
@@ -17,7 +18,7 @@ const COLORFUL_CATEGORIES = [
   {
     id: 'overview',
     title: 'Overview',
-    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#E8DED5] text-[#2C1810]',
+    bg: 'from-[#FFFDFB] to-[#FFF5F5] border-[#FEE2E2] text-[#252525]',
     icon: LayoutDashboard,
     items: [
       { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
@@ -28,7 +29,7 @@ const COLORFUL_CATEGORIES = [
   {
     id: 'subscriptions',
     title: 'Subscription Management',
-    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#DDB892] text-[#6F4E37]',
+    bg: 'from-[#FFFDFB] to-[#FFF5F5] border-[#EF5350] text-[#E50914]',
     icon: Sparkles,
     items: [
       { name: 'Overview', href: '/admin/subscriptions', icon: LayoutDashboard },
@@ -42,7 +43,7 @@ const COLORFUL_CATEGORIES = [
   {
     id: 'users',
     title: 'Users & Staff',
-    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#E8DED5] text-[#2C1810]',
+    bg: 'from-[#FFFDFB] to-[#FFF5F5] border-[#FEE2E2] text-[#252525]',
     icon: Users,
     items: [
       { name: 'Customers', href: '/admin/customers', icon: Users },
@@ -54,32 +55,58 @@ const COLORFUL_CATEGORIES = [
   {
     id: 'cafes',
     title: 'Cafes & Outlets',
-    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#E8DED5] text-[#2C1810]',
+    bg: 'from-[#FFFDFB] to-[#FFF5F5] border-[#FEE2E2] text-[#252525]',
     icon: Store,
     items: [
       { name: 'All Cafes', href: '/admin/cafes', icon: Store },
       { name: 'Cafe Verifications', href: '/admin/verifications?tab=cafes', icon: CheckCircle2 },
-      { name: 'Cafe Reviews', href: '/admin/reviews?type=cafes', icon: MessageSquare }
+      { name: 'Cafe Reviews', href: '/admin/reviews?type=cafes', icon: MessageSquare },
+      { name: 'Categories & Amenities', href: '/admin/settings?tab=categories', icon: Tags }
+    ]
+  },
+  {
+    id: 'restaurants',
+    title: 'Restaurants',
+    bg: 'from-[#FFFDFB] to-[#FFF5F5] border-[#FEE2E2] text-[#252525]',
+    icon: Building2,
+    items: [
+      { name: 'All Restaurants', href: '/admin/restaurants', icon: Building2 },
+      { name: 'Restaurant Verifications', href: '/admin/verifications?tab=restaurants', icon: CheckCircle2 },
+      { name: 'Restaurant Reviews', href: '/admin/reviews?type=restaurants', icon: Star }
+    ]
+  },
+  {
+    id: 'food',
+    title: 'Food Orders & Delivery',
+    bg: 'from-[#FFFDFB] to-[#FFF5F5] border-[#EF5350] text-[#E50914]',
+    icon: ShoppingBag,
+    items: [
+      { name: 'Food Overview', href: '/admin/food-overview', icon: LayoutDashboard },
+      { name: 'Food Orders', href: '/admin/food-orders', icon: ShoppingBag },
+      { name: 'Food Analytics', href: '/admin/food-analytics', icon: TrendingUp },
+      { name: 'Food Reviews', href: '/admin/reviews?type=food', icon: Star }
     ]
   },
   {
     id: 'events',
     title: 'Events & Experiences',
-    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#E8DED5] text-[#2C1810]',
+    bg: 'from-[#FFFDFB] to-[#FFF5F5] border-[#FEE2E2] text-[#252525]',
     icon: Sparkles,
     items: [
       { name: 'All Events', href: '/admin/event-managers?tab=packages', icon: Sparkles },
       { name: 'Event Organizers', href: '/admin/event-managers', icon: Users },
-      { name: 'Event Categories', href: '/admin/settings?tab=event_categories', icon: Tags }
+      { name: 'Event Categories', href: '/admin/settings?tab=event_categories', icon: Tags },
+      { name: 'Event Reviews', href: '/admin/reviews?type=events', icon: MessageSquare }
     ]
   },
   {
     id: 'bookings',
     title: 'Bookings & Refunds',
-    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#E8DED5] text-[#2C1810]',
+    bg: 'from-[#FFFDFB] to-[#FFF5F5] border-[#FEE2E2] text-[#252525]',
     icon: CalendarCheck,
     items: [
       { name: 'All Bookings', href: '/admin/bookings', icon: CalendarCheck },
+      { name: 'Food Orders', href: '/admin/food-orders', icon: ShoppingBag },
       { name: 'Cancellations', href: '/admin/refunds?type=cancellations', icon: FileX },
       { name: 'Disputes', href: '/admin/disputes', icon: AlertTriangle }
     ]
@@ -87,20 +114,43 @@ const COLORFUL_CATEGORIES = [
   {
     id: 'finance',
     title: 'Finance & Payouts',
-    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#E8DED5] text-[#2C1810]',
+    bg: 'from-[#FFFDFB] to-[#FFF5F5] border-[#FEE2E2] text-[#252525]',
     icon: CreditCard,
     items: [
       { name: 'Payments', href: '/admin/payments', icon: CreditCard },
       { name: 'Partner Subscriptions', href: '/admin/subscriptions', icon: Sparkles },
       { name: 'Settlements', href: '/admin/payouts', icon: Receipt },
       { name: 'Refunds', href: '/admin/refunds', icon: RotateCcw },
+      { name: 'Transactions', href: '/admin/transactions', icon: Receipt },
       { name: 'Razorpay Accounts', href: '/admin/payout-accounts', icon: Building2 }
+    ]
+  },
+  {
+    id: 'verification',
+    title: 'Verifications',
+    bg: 'from-[#FFFDFB] to-[#FFF5F5] border-[#FEE2E2] text-[#252525]',
+    icon: BadgeCheck,
+    items: [
+      { name: 'Cafe Bank Verification', href: '/admin/payout-accounts?tab=bank', icon: Landmark },
+      { name: 'Event Verification', href: '/admin/verifications', icon: UserCheck },
+      { name: 'Pending Approvals', href: '/admin/verifications?status=PENDING', icon: Clock },
+      { name: 'Verification History', href: '/admin/audit-logs?filter=verifications', icon: History }
+    ]
+  },
+  {
+    id: 'reports',
+    title: 'Reports & Revenue',
+    bg: 'from-[#FFFDFB] to-[#FFF5F5] border-[#FEE2E2] text-[#252525]',
+    icon: TrendingUp,
+    items: [
+      { name: 'Revenue Reports', href: '/admin/revenue', icon: TrendingUp },
+      { name: 'Booking Reports', href: '/admin/reports', icon: FileX }
     ]
   },
   {
     id: 'communication',
     title: 'Communication',
-    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#E8DED5] text-[#2C1810]',
+    bg: 'from-[#FFFDFB] to-[#FFF5F5] border-[#FEE2E2] text-[#252525]',
     icon: Bell,
     items: [
       { name: 'Notifications', href: '/admin/notifications', icon: Bell },
@@ -110,7 +160,7 @@ const COLORFUL_CATEGORIES = [
   {
     id: 'system',
     title: 'System & Security',
-    bg: 'from-[#FFFDFB] to-[#FFF8F0] border-[#E8DED5] text-[#2C1810]',
+    bg: 'from-[#FFFDFB] to-[#FFF5F5] border-[#FEE2E2] text-[#252525]',
     icon: Shield,
     items: [
       { name: 'Support & Tickets', href: '/admin/disputes?view=tickets', icon: LifeBuoy },
@@ -254,8 +304,8 @@ export default function MobileBottomNav() {
                       key={category.id} 
                       className={`bg-gradient-to-br ${category.bg} border rounded-2xl p-3.5 xs:p-4 shadow-2xs space-y-2`}
                     >
-                      <div className="flex items-center gap-2 border-b border-[#E8DED5] pb-2">
-                        <div className="w-5 h-5 rounded-lg bg-[#6F4E37]/10 flex items-center justify-center text-[#6F4E37]">
+                      <div className="flex items-center gap-2 border-b border-[#FEE2E2] pb-2">
+                        <div className="w-5 h-5 rounded-lg bg-[#E50914]/10 flex items-center justify-center text-[#E50914]">
                           <CategoryIcon className="w-3 h-3 xs:w-3.5 xs:h-3.5 font-bold" />
                         </div>
                         <h4 className="text-[11px] xs:text-xs font-black uppercase tracking-wider">{category.title}</h4>
@@ -272,11 +322,11 @@ export default function MobileBottomNav() {
                               onClick={() => setIsDrawerOpen(false)}
                               className={`flex items-center gap-1.5 xs:gap-2 p-2 xs:p-2.5 rounded-xl text-[11px] xs:text-xs font-bold transition-all ${
                                 isActive 
-                                  ? 'bg-[#6F4E37] text-white shadow-2xs' 
-                                  : 'bg-white hover:bg-[#FFF8F0] text-[#2C1810] border border-[#E8DED5] hover:border-[#6F4E37]/40 shadow-2xs'
+                                  ? 'bg-[#E50914] text-white shadow-2xs' 
+                                  : 'bg-white hover:bg-[#FFF5F5] text-[#252525] border border-[#FEE2E2] hover:border-[#E50914]/40 shadow-2xs'
                               }`}
                             >
-                              <ItemIcon className="w-3 h-3 xs:w-3.5 xs:h-3.5 shrink-0 text-[#6F4E37]" />
+                              <ItemIcon className="w-3 h-3 xs:w-3.5 xs:h-3.5 shrink-0 text-[#E50914]" />
                               <span className="truncate">{item.name}</span>
                             </Link>
                           );

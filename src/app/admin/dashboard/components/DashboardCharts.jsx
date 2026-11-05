@@ -76,18 +76,18 @@ export const DashboardCharts = ({ summary }) => {
                 <AreaChart data={revenueData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorRev" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#6F4E37" stopOpacity={0.35}/>
-                      <stop offset="95%" stopColor="#6F4E37" stopOpacity={0}/>
+                      <stop offset="5%" stopColor="#E50914" stopOpacity={0.35}/>
+                      <stop offset="95%" stopColor="#E50914" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E8DED5" />
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: '#A67B5B' }} dy={10} />
-                  <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: '#A67B5B' }} tickFormatter={(val) => `₹${val}`} />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#FEE2E2" />
+                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: '#B71C1C' }} dy={10} />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: '#B71C1C' }} tickFormatter={(val) => `₹${val}`} />
                   <Tooltip 
-                    contentStyle={{ borderRadius: '12px', border: '1px solid #E8DED5', backgroundColor: '#FFF8F0', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}
+                    contentStyle={{ borderRadius: '12px', border: '1px solid #FEE2E2', backgroundColor: '#FFF5F5', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}
                     formatter={(value) => [formatCurrency(value), 'Revenue']}
                   />
-                  <Area type="monotone" dataKey="revenue" stroke="#6F4E37" strokeWidth={3} fillOpacity={1} fill="url(#colorRev)" />
+                  <Area type="monotone" dataKey="revenue" stroke="#E50914" strokeWidth={3} fillOpacity={1} fill="url(#colorRev)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
@@ -112,15 +112,15 @@ export const DashboardCharts = ({ summary }) => {
           <div className="h-[280px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={bookingTrend} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E8DED5" />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: '#A67B5B' }} dy={10} />
-                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: '#A67B5B' }} allowDecimals={false} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#FEE2E2" />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: '#B71C1C' }} dy={10} />
+                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: '#B71C1C' }} allowDecimals={false} />
                 <Tooltip 
-                  cursor={{ fill: '#FFF8F0' }}
-                  contentStyle={{ borderRadius: '12px', border: '1px solid #E8DED5', backgroundColor: '#FFFFFF' }}
+                  cursor={{ fill: '#FFF5F5' }}
+                  contentStyle={{ borderRadius: '12px', border: '1px solid #FEE2E2', backgroundColor: '#FFFFFF' }}
                   formatter={(value) => [`${value} Bookings`, 'Volume']}
                 />
-                <Bar dataKey="bookings" fill="#A67B5B" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="bookings" fill="#B71C1C" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -141,13 +141,13 @@ export const DashboardCharts = ({ summary }) => {
           <div className="h-[280px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={growthData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E8DED5" />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: '#A67B5B' }} dy={10} />
-                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: '#A67B5B' }} allowDecimals={false} />
-                <Tooltip contentStyle={{ borderRadius: '12px', border: '1px solid #E8DED5' }} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#FEE2E2" />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: '#B71C1C' }} dy={10} />
+                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: '#B71C1C' }} allowDecimals={false} />
+                <Tooltip contentStyle={{ borderRadius: '12px', border: '1px solid #FEE2E2' }} />
                 <Legend iconType="circle" wrapperStyle={{ fontSize: '11px', paddingTop: '15px' }} />
-                <Line type="monotone" dataKey="customers" name="Customers" stroke="#6F4E37" strokeWidth={3} dot={{r: 4}} />
-                <Line type="monotone" dataKey="cafes" name="Cafes" stroke="#A67B5B" strokeWidth={3} dot={{r: 4}} />
+                <Line type="monotone" dataKey="customers" name="Customers" stroke="#E50914" strokeWidth={3} dot={{r: 4}} />
+                <Line type="monotone" dataKey="cafes" name="Cafes" stroke="#B71C1C" strokeWidth={3} dot={{r: 4}} />
                 <Line type="monotone" dataKey="managers" name="Event Managers" stroke="#10b981" strokeWidth={3} dot={{r: 4}} />
               </LineChart>
             </ResponsiveContainer>
@@ -182,7 +182,7 @@ export const DashboardCharts = ({ summary }) => {
                     <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip contentStyle={{ borderRadius: '12px', border: '1px solid #E8DED5' }} />
+                <Tooltip contentStyle={{ borderRadius: '12px', border: '1px solid #FEE2E2' }} />
                 <Legend iconType="circle" wrapperStyle={{ fontSize: '11px', paddingTop: '15px' }} />
               </PieChart>
             </ResponsiveContainer>

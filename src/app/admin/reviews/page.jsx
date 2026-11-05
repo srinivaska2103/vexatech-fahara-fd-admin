@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import api from '@/lib/axios';
-import { Search, Filter, MessageSquare, Loader2, Star, AlertTriangle, CheckCircle, Trash2, Eye, EyeOff, ShieldCheck, Sparkles, Coffee } from 'lucide-react';
+import { Search, Filter, MessageSquare, Loader2, Star, AlertTriangle, CheckCircle, Trash2, Eye, EyeOff, ShieldCheck, Sparkles, Coffee, ShoppingBag, Utensils } from 'lucide-react';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -14,13 +14,14 @@ function ReviewsContent() {
   const queryClient = useQueryClient();
 
   const typeParam = searchParams.get('type');
-  const [activeTab, setActiveTab] = useState(typeParam === 'events' ? 'events' : typeParam === 'restaurants' ? 'restaurants' : typeParam === 'cafes' ? 'cafes' : 'all');
+  const [activeTab, setActiveTab] = useState(typeParam === 'food' ? 'food' : typeParam === 'events' ? 'events' : typeParam === 'restaurants' ? 'restaurants' : typeParam === 'cafes' ? 'cafes' : 'all');
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
   const [actionConfirm, setActionConfirm] = useState(null);
 
   useEffect(() => {
-    if (typeParam === 'events') setActiveTab('events');
+    if (typeParam === 'food') setActiveTab('food');
+    else if (typeParam === 'events') setActiveTab('events');
     else if (typeParam === 'restaurants') setActiveTab('restaurants');
     else if (typeParam === 'cafes') setActiveTab('cafes');
     else setActiveTab('all');
@@ -61,7 +62,10 @@ function ReviewsContent() {
 
   const filteredReviews = reviews?.filter(r => {
     // 1. Type Filter (Cafes vs Restaurants vs Events)
-    if (activeTab === 'events') {
+    if (activeTab === 'food') {
+      const isFood = r.review_type === 'FOOD_ORDER' || r.business?.type === 'FOOD' || !!r.order;
+      if (!isFood) return false;
+    } else if (activeTab === 'events') {
       const isEvent = r.business?.type === 'EVENT' || r.event_service_id || r.type === 'EVENT';
       if (!isEvent) return false;
     } else if (activeTab === 'restaurants') {

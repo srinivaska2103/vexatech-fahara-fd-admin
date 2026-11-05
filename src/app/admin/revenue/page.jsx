@@ -45,7 +45,7 @@ export default function RevenueDashboard() {
 
   const stats = [
     { name: 'Gross Booking Value', value: grossVal, icon: Wallet, color: 'text-blue-600', bg: 'bg-blue-50 border-blue-200' },
-    { name: 'Fahara Revenue', value: faharaRevVal, icon: Percent, color: 'text-fahara-primary', bg: 'bg-amber-50 border-amber-200' },
+    { name: 'Grab2GO Revenue', value: faharaRevVal, icon: Percent, color: 'text-fahara-primary', bg: 'bg-amber-50 border-amber-200' },
     { name: 'GST Tax Collected', value: gstTaxVal, icon: ShieldCheck, color: 'text-indigo-600', bg: 'bg-indigo-50 border-indigo-200' },
     { name: 'Transaction Fee', value: txnFeeVal, icon: Receipt, color: 'text-cyan-600', bg: 'bg-cyan-50 border-cyan-200' },
     { name: 'Refunds Settled', value: Number(revenueData?.refunds || 0), icon: RefreshCcw, color: 'text-rose-600', bg: 'bg-rose-50 border-rose-200' },
@@ -142,18 +142,18 @@ export default function RevenueDashboard() {
               <AreaChart data={chartData}>
                 <defs>
                   <linearGradient id="colorRev" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#6F4E37" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#6F4E37" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="#E50914" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#E50914" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E8DED5" />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#2C1810', fontSize: 11}} />
-                <YAxis axisLine={false} tickLine={false} tick={{fill: '#2C1810', fontSize: 11}} tickFormatter={(val) => `₹${val}`} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#FEE2E2" />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#252525', fontSize: 11}} />
+                <YAxis axisLine={false} tickLine={false} tick={{fill: '#252525', fontSize: 11}} tickFormatter={(val) => `₹${val}`} />
                 <Tooltip 
-                  contentStyle={{ borderRadius: '16px', border: '1px solid #E8DED5', backgroundColor: '#FFF8F0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}
+                  contentStyle={{ borderRadius: '16px', border: '1px solid #FEE2E2', backgroundColor: '#FFF5F5', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}
                   formatter={(value) => [`₹${Number(value).toLocaleString('en-IN', { minimumFractionDigits: 2 })}`, 'Revenue']}
                 />
-                <Area type="monotone" dataKey="Revenue" stroke="#6F4E37" strokeWidth={3} fillOpacity={1} fill="url(#colorRev)" />
+                <Area type="monotone" dataKey="Revenue" stroke="#E50914" strokeWidth={3} fillOpacity={1} fill="url(#colorRev)" />
               </AreaChart>
             </ResponsiveContainer>
           </div>

@@ -74,7 +74,7 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-fahara-background p-4 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-white p-4 relative overflow-hidden">
       {/* Background Decorative Blur Spheres */}
       <div className="absolute -top-24 -left-24 w-96 h-96 bg-fahara-primary/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-fahara-accent/20 rounded-full blur-3xl pointer-events-none" />
@@ -89,8 +89,8 @@ export default function AdminLogin() {
         <div className="flex flex-col items-center text-center mb-8">
           <div className="relative mb-4 h-16 w-16 overflow-hidden rounded-2xl border-2 border-fahara-border bg-fahara-surface shadow-md p-0.5">
             <img
-              src="/Fahara Logo.jpeg"
-              alt="Fahara Logo"
+              src="/grab-it-logo.png"
+              alt="Grab2GO Logo"
               className="h-full w-full object-cover rounded-xl"
             />
           </div>
@@ -100,7 +100,7 @@ export default function AdminLogin() {
             <span>Admin Management</span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-fahara-text tracking-tight">Fahara Admin</h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-fahara-text tracking-tight">Grab2GO Admin</h1>
           <p className="text-sm text-fahara-secondary mt-1">Enter your email to receive an OTP</p>
         </div>
 
@@ -116,7 +116,7 @@ export default function AdminLogin() {
                 type="email"
                 suppressHydrationWarning
                 disabled={loginMutation.isPending || isRedirecting}
-                className={`block w-full pl-10 pr-4 py-3 text-sm border ${errors.email ? 'border-red-500' : 'border-fahara-border'} rounded-xl bg-fahara-background focus:outline-none focus:ring-2 focus:ring-fahara-primary/40 focus:border-fahara-primary transition-all text-fahara-text placeholder:text-fahara-secondary/50`}
+                className={`block w-full pl-10 pr-4 py-3 text-sm border ${errors.email ? 'border-red-500' : 'border-fahara-border'} rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-fahara-primary/40 focus:border-fahara-primary transition-all text-fahara-text placeholder:text-fahara-secondary/50`}
                 placeholder="admin@fahara.com"
               />
             </div>
@@ -130,7 +130,7 @@ export default function AdminLogin() {
               {...register('rememberMe')}
               id="rememberMe"
               type="checkbox"
-              className="h-4 w-4 text-fahara-primary focus:ring-fahara-primary border-fahara-border rounded bg-fahara-background accent-fahara-primary cursor-pointer"
+              className="h-4 w-4 text-fahara-primary focus:ring-fahara-primary border-fahara-border rounded bg-white accent-fahara-primary cursor-pointer"
             />
             <label htmlFor="rememberMe" className="ml-2 block text-xs text-fahara-text cursor-pointer">
               Remember me on this device

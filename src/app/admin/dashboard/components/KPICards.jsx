@@ -224,7 +224,7 @@ export const KPICards = ({ summary }) => {
             colorScheme="emerald"
           />
           <KPICard 
-            title="Fahara Platform Revenue" 
+            title="Grab2GO Platform Revenue" 
             value={summary.fahara_revenue || 0} 
             icon={Wallet} 
             type="currency" 

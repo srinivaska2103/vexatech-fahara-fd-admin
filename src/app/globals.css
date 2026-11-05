@@ -7,18 +7,18 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
 
-  --color-fahara-primary: #6F4E37;
-  --color-fahara-secondary: #A67B5B;
-  --color-fahara-accent: #DDB892;
-  --color-fahara-background: #FFF8F0;
+  --color-fahara-primary: #E50914;
+  --color-fahara-secondary: #B71C1C;
+  --color-fahara-accent: #EF5350;
+  --color-fahara-background: #FFF5F5;
   --color-fahara-surface: #FFFFFF;
-  --color-fahara-border: #E8DED5;
-  --color-fahara-text: #2C1810;
+  --color-fahara-border: #FEE2E2;
+  --color-fahara-text: #252525;
 }
 
 :root {
-  --background: #FFF8F0;
-  --foreground: #2C1810;
+  --background: #FFF5F5;
+  --foreground: #252525;
 }
 
 html, body {

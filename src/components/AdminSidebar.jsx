@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  LayoutDashboard, BarChart3, Activity, Users, UserCheck, CalendarDays, 
+  LayoutDashboard,
+  ShoppingBag, BarChart3, Activity, Users, UserCheck, CalendarDays, 
   ShieldCheck, Coffee, CheckCircle2, Star, Grid, Sparkles, Tags, 
   MessageSquare, Calendar, FileX, AlertTriangle, CreditCard, 
   Wallet, RotateCcw, Receipt, Building2, Landmark, Clock, History, 
@@ -18,6 +19,11 @@ import { useAdminAuthStore } from '@/store/adminAuthStore';
 import api from '@/lib/axios';
 
 const getItemIconColors = (href, name) => {
+  if (href.includes('food-overview')) return 'bg-rose-100/90 text-rose-700 border-rose-200/70';
+  if (href.includes('food-orders')) return 'bg-rose-100/90 text-[#E50914] border-rose-200/70';
+  if (href.includes('food-analytics')) return 'bg-amber-100/90 text-amber-700 border-amber-200/70';
+  if (href.includes('reviews?type=food') || href.includes('type=food')) return 'bg-orange-100/90 text-orange-700 border-orange-200/70';
+  
   if (href.includes('dashboard')) return 'bg-amber-100/90 text-amber-700 border-amber-200/70';
   if (href.includes('analytics') || href.includes('reports?view=analytics')) return 'bg-purple-100/90 text-purple-700 border-purple-200/70';
   if (href.includes('audit-logs')) return 'bg-slate-100/90 text-slate-700 border-slate-200/70';
@@ -104,11 +110,23 @@ const navigationGroups = [
     ]
   },
   {
+    id: 'food',
+    title: 'FOOD MANAGEMENT',
+    icon: ShoppingBag,
+    items: [
+      { name: 'Food Overview', href: '/admin/food-overview', icon: LayoutDashboard },
+      { name: 'Food Orders', href: '/admin/food-orders', icon: ShoppingBag },
+      { name: 'Food Analytics', href: '/admin/food-analytics', icon: TrendingUp },
+      { name: 'Food Reviews', href: '/admin/reviews?type=food', icon: Star },
+    ]
+  },
+  {
     id: 'bookings',
     title: 'BOOKINGS',
     icon: Calendar,
     items: [
       { name: 'All Bookings', href: '/admin/bookings', icon: Calendar },
+      { name: 'Food Orders', href: '/admin/food-orders', icon: ShoppingBag },
       { name: 'Cancellations', href: '/admin/refunds?type=cancellations', icon: FileX },
       { name: 'Disputes', href: '/admin/disputes', icon: AlertTriangle },
     ]
@@ -266,25 +284,25 @@ function SidebarContent({ isMobileOpen, onCloseMobile }) {
   };
 
   return (
-    <div className="flex h-full flex-col bg-white border-r border-[#E8DED5] shadow-xs select-none overflow-x-hidden">
+    <div className="flex h-full flex-col bg-white border-r border-[#FEE2E2] shadow-xs select-none overflow-x-hidden">
       {/* Brand Header */}
-      <div className="flex items-center justify-between border-b border-[#E8DED5] px-5 py-4 flex-shrink-0 bg-[#FFF8F0]/50">
+      <div className="flex items-center justify-between border-b border-[#FEE2E2] px-5 py-4 flex-shrink-0 bg-[#FFF5F5]/50">
         <Link 
           href="/admin/dashboard" 
           onClick={onCloseMobile}
           className="flex items-center gap-3 group"
         >
-          <div className="relative h-10 w-10 overflow-hidden rounded-2xl border border-[#DDB892]/60 bg-white shadow-xs transition-transform group-hover:scale-105">
+          <div className="relative h-10 w-10 overflow-hidden rounded-2xl border border-[#EF5350]/60 bg-white shadow-xs transition-transform group-hover:scale-105">
             <img 
-              src="/Fahara Logo.jpeg" 
-              alt="Fahara Logo" 
+              src="/grab-it-logo.png" 
+              alt="Grab2GO Logo" 
               className="h-full w-full object-cover" 
             />
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
-              <span className="text-base font-black tracking-tight text-[#2C1810]">Fahara</span>
-              <span className="rounded-full bg-[#6F4E37]/10 px-2 py-0.5 text-[9px] font-extrabold text-[#6F4E37] uppercase tracking-wider border border-[#6F4E37]/20">
+              <span className="text-base font-black tracking-tight text-[#252525]">Grab2GO</span>
+              <span className="rounded-full bg-[#E50914]/10 px-2 py-0.5 text-[9px] font-extrabold text-[#E50914] uppercase tracking-wider border border-[#E50914]/20">
                 Admin
               </span>
             </div>
@@ -293,18 +311,18 @@ function SidebarContent({ isMobileOpen, onCloseMobile }) {
         </Link>
         <button
           onClick={onCloseMobile}
-          className="rounded-xl p-1.5 text-stone-500 hover:bg-[#FFF8F0] hover:text-[#2C1810] md:hidden transition-colors"
+          className="rounded-xl p-1.5 text-stone-500 hover:bg-[#FFF5F5] hover:text-[#252525] md:hidden transition-colors"
         >
           <X className="h-5 w-5" />
         </button>
       </div>
 
-      <div className="flex items-center justify-between px-4 py-2 bg-[#FFF8F0]/70 border-b border-[#E8DED5] text-[10px] font-extrabold text-[#6F4E37]">
+      <div className="flex items-center justify-between px-4 py-2 bg-[#FFF5F5]/70 border-b border-[#FEE2E2] text-[10px] font-extrabold text-[#E50914]">
         <span>MENU CATEGORIES</span>
         <button 
           suppressHydrationWarning
           onClick={toggleExpandAll}
-          className="flex items-center gap-1 hover:text-[#2C1810] transition-colors cursor-pointer"
+          className="flex items-center gap-1 hover:text-[#252525] transition-colors cursor-pointer"
           title="Toggle Expand All"
         >
           <ChevronsUpDown className="h-3 w-3" />
@@ -326,8 +344,8 @@ function SidebarContent({ isMobileOpen, onCloseMobile }) {
                 onClick={() => toggleSection(group.id)}
                 className={`w-full flex items-center justify-between px-2.5 py-1.5 text-[11px] font-extrabold uppercase tracking-wider rounded-xl transition-all duration-150 cursor-pointer ${
                   hasActiveChild 
-                    ? 'text-[#6F4E37] font-black bg-[#FFF8F0]' 
-                    : 'text-stone-500 hover:text-[#2C1810] hover:bg-[#FFF8F0]/60'
+                    ? 'text-[#E50914] font-black bg-[#FFF5F5]' 
+                    : 'text-stone-500 hover:text-[#252525] hover:bg-[#FFF5F5]/60'
                 }`}
               >
                 <div className="flex items-center gap-2">
@@ -338,7 +356,7 @@ function SidebarContent({ isMobileOpen, onCloseMobile }) {
                     </span>
                   )}
                 </div>
-                <ChevronRight className={`w-3.5 h-3.5 text-stone-400 transition-transform duration-200 ${isOpen ? 'rotate-90 text-[#6F4E37]' : ''}`} />
+                <ChevronRight className={`w-3.5 h-3.5 text-stone-400 transition-transform duration-200 ${isOpen ? 'rotate-90 text-[#E50914]' : ''}`} />
               </button>
 
               {/* Sublinks with smooth motion height expansion */}
@@ -351,7 +369,7 @@ function SidebarContent({ isMobileOpen, onCloseMobile }) {
                     transition={{ duration: 0.22, ease: 'easeInOut' }}
                     className="overflow-hidden"
                   >
-                    <div className="mt-1.5 ml-4 border-l border-[#E8DED5] pl-2.5 space-y-1 my-1.5">
+                    <div className="mt-1.5 ml-4 border-l border-[#FEE2E2] pl-2.5 space-y-1 my-1.5">
                       {group.items.map((item) => {
                         const isActive = group.id === activeInfo.groupId && item.name === activeInfo.itemName;
                         const ItemIcon = item.icon;
@@ -364,12 +382,12 @@ function SidebarContent({ isMobileOpen, onCloseMobile }) {
                               onClick={onCloseMobile}
                               className={`group relative flex items-center rounded-2xl px-2.5 py-1.5 transition-all duration-200 cursor-pointer ${
                                 isActive
-                                  ? 'bg-[#FFF5EA] text-[#4A2C11] font-black border border-[#DDB892]/60 shadow-2xs translate-x-0.5'
-                                  : 'text-[#2C1810]/85 font-extrabold hover:bg-[#FFF8F0]/80 hover:text-[#4A2C11] hover:translate-x-0.5'
+                                  ? 'bg-[#FFF5F5] text-[#B71C1C] font-black border border-[#EF5350]/60 shadow-2xs translate-x-0.5'
+                                  : 'text-[#252525]/85 font-extrabold hover:bg-[#FFF5F5]/80 hover:text-[#B71C1C] hover:translate-x-0.5'
                               }`}
                             >
                               {/* Branch Guide Arrow ↳ */}
-                              <CornerDownRight className="w-3 h-3 text-stone-300 stroke-[2] shrink-0 mr-1.5 group-hover:text-[#6F4E37] transition-colors" />
+                              <CornerDownRight className="w-3 h-3 text-stone-300 stroke-[2] shrink-0 mr-1.5 group-hover:text-[#E50914] transition-colors" />
 
                               {/* Signature Colored Icon Badge */}
                               <div className={`w-7 h-7 rounded-xl flex items-center justify-center shrink-0 mr-2 border shadow-2xs transition-transform group-hover:scale-110 ${iconStyle}`}>
@@ -378,7 +396,7 @@ function SidebarContent({ isMobileOpen, onCloseMobile }) {
 
                               <span className="truncate flex-1 text-[11px] font-extrabold">{item.name}</span>
 
-                              <ChevronRight className="w-3 h-3 text-[#6F4E37] opacity-0 group-hover:opacity-100 transition-opacity ml-1" />
+                              <ChevronRight className="w-3 h-3 text-[#E50914] opacity-0 group-hover:opacity-100 transition-opacity ml-1" />
                             </Link>
                           </motion.div>
                         );

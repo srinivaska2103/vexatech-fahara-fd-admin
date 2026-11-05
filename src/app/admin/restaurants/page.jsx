@@ -91,9 +91,9 @@ export default function RestaurantList() {
       className="w-full space-y-8 pb-12 overflow-x-hidden"
     >
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E8DED5] pb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#FEE2E2] pb-6">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#2C1810] tracking-tight flex items-center gap-2.5">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#252525] tracking-tight flex items-center gap-2.5">
             <Building2 className="h-7 w-7 text-orange-600" />
             Restaurant Partner Directory
           </h1>
@@ -101,50 +101,50 @@ export default function RestaurantList() {
             Manage partner restaurants, review verification submissions, and oversee active restaurant profiles.
           </p>
         </div>
-        <div className="flex items-center gap-2 text-xs text-stone-600 bg-[#FFF8F0] border border-[#E8DED5] px-3.5 py-1.5 rounded-xl font-bold">
+        <div className="flex items-center gap-2 text-xs text-stone-600 bg-[#FFF5F5] border border-[#FEE2E2] px-3.5 py-1.5 rounded-xl font-bold">
           <span>Total Partner Restaurants:</span>
-          <span className="font-black text-[#2C1810]">{restaurants?.length || 0}</span>
+          <span className="font-black text-[#252525]">{restaurants?.length || 0}</span>
         </div>
       </div>
 
       {/* Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white border border-[#E8DED5] rounded-2xl p-5 shadow-2xs">
+        <div className="bg-white border border-[#FEE2E2] rounded-2xl p-5 shadow-2xs">
           <div className="flex justify-between items-center">
             <span className="text-xs font-black uppercase tracking-wider text-stone-500">Total Restaurants</span>
             <div className="h-9 w-9 rounded-xl bg-orange-50 text-orange-600 border border-orange-200 flex items-center justify-center">
               <Building2 className="h-4 w-4" />
             </div>
           </div>
-          <div className="text-2xl font-black text-[#2C1810] mt-2">{restaurants?.length || 0}</div>
+          <div className="text-2xl font-black text-[#252525] mt-2">{restaurants?.length || 0}</div>
           <span className="text-[11px] text-stone-500 mt-1 block">Registered Partners</span>
         </div>
 
-        <div className="bg-white border border-[#E8DED5] rounded-2xl p-5 shadow-2xs">
+        <div className="bg-white border border-[#FEE2E2] rounded-2xl p-5 shadow-2xs">
           <div className="flex justify-between items-center">
             <span className="text-xs font-black uppercase tracking-wider text-stone-500">Verified & Active</span>
             <div className="h-9 w-9 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center">
               <CheckCircle2 className="h-4 w-4" />
             </div>
           </div>
-          <div className="text-2xl font-black text-[#2C1810] mt-2">{totalActive}</div>
+          <div className="text-2xl font-black text-[#252525] mt-2">{totalActive}</div>
           <span className="text-[11px] text-emerald-600 font-extrabold mt-1 block">Customer Visible Partners</span>
         </div>
 
-        <div className="bg-white border border-[#E8DED5] rounded-2xl p-5 shadow-2xs">
+        <div className="bg-white border border-[#FEE2E2] rounded-2xl p-5 shadow-2xs">
           <div className="flex justify-between items-center">
             <span className="text-xs font-black uppercase tracking-wider text-stone-500">Pending Verification</span>
             <div className="h-9 w-9 rounded-xl bg-amber-50 text-amber-600 border border-amber-200 flex items-center justify-center">
               <Clock className="h-4 w-4" />
             </div>
           </div>
-          <div className="text-2xl font-black text-[#2C1810] mt-2">{totalPending}</div>
+          <div className="text-2xl font-black text-[#252525] mt-2">{totalPending}</div>
           <span className="text-[11px] text-amber-600 font-extrabold mt-1 block">Awaiting Admin Approval</span>
         </div>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white border border-[#E8DED5] rounded-2xl p-4 shadow-2xs flex flex-col md:flex-row gap-4 justify-between items-center">
+      <div className="bg-white border border-[#FEE2E2] rounded-2xl p-4 shadow-2xs flex flex-col md:flex-row gap-4 justify-between items-center">
         <div className="relative flex-1 w-full max-w-md">
           <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
             <Search className="h-4 w-4" />
@@ -152,7 +152,7 @@ export default function RestaurantList() {
           <input
             type="text"
             suppressHydrationWarning
-            className="block w-full pl-10 pr-4 py-2.5 border border-[#E8DED5] rounded-xl bg-[#FFF8F0]/30 text-xs text-[#2C1810] focus:outline-none focus:ring-2 focus:ring-[#6F4E37]/30 focus:border-[#6F4E37] font-semibold transition-all placeholder:text-stone-400"
+            className="block w-full pl-10 pr-4 py-2.5 border border-[#FEE2E2] rounded-xl bg-[#FFF5F5]/30 text-xs text-[#252525] focus:outline-none focus:ring-2 focus:ring-[#E50914]/30 focus:border-[#E50914] font-semibold transition-all placeholder:text-stone-400"
             placeholder="Search by restaurant name, city, owner name or email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -162,7 +162,7 @@ export default function RestaurantList() {
           <Filter className="w-4 h-4 text-stone-500" />
           <select 
             suppressHydrationWarning
-            className="w-full md:w-auto bg-[#FFF8F0]/40 border border-[#E8DED5] rounded-xl px-3.5 py-2.5 text-xs font-extrabold text-[#2C1810] focus:outline-none focus:ring-2 focus:ring-[#6F4E37]/30 cursor-pointer"
+            className="w-full md:w-auto bg-[#FFF5F5]/40 border border-[#FEE2E2] rounded-xl px-3.5 py-2.5 text-xs font-extrabold text-[#252525] focus:outline-none focus:ring-2 focus:ring-[#E50914]/30 cursor-pointer"
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
           >
@@ -177,11 +177,11 @@ export default function RestaurantList() {
       </div>
 
       {/* Restaurants Data Table */}
-      <div className="bg-white border border-[#E8DED5] rounded-2xl overflow-hidden shadow-2xs">
+      <div className="bg-white border border-[#FEE2E2] rounded-2xl overflow-hidden shadow-2xs">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="bg-[#FFF8F0]/80 border-b border-[#E8DED5] text-stone-500 font-black uppercase tracking-wider text-[10px]">
+              <tr className="bg-[#FFF5F5]/80 border-b border-[#FEE2E2] text-stone-500 font-black uppercase tracking-wider text-[10px]">
                 <th className="px-6 py-4">Restaurant</th>
                 <th className="px-6 py-4">Owner</th>
                 <th className="px-6 py-4">Contact</th>
@@ -192,12 +192,12 @@ export default function RestaurantList() {
                 <th className="px-6 py-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#E8DED5]">
+            <tbody className="divide-y divide-[#FEE2E2]">
               {isLoading ? (
                 <tr>
                   <td colSpan="8" className="px-6 py-12 text-center text-stone-500">
                     <div className="flex justify-center items-center gap-2 font-bold">
-                      <Loader2 className="h-5 w-5 animate-spin text-[#6F4E37]" />
+                      <Loader2 className="h-5 w-5 animate-spin text-[#E50914]" />
                       <span>Loading partner restaurants...</span>
                     </div>
                   </td>
@@ -207,7 +207,7 @@ export default function RestaurantList() {
                   <td colSpan="8" className="px-6 py-12 text-center text-stone-500">
                     <div className="flex flex-col items-center justify-center gap-1.5">
                       <Building2 className="h-8 w-8 text-stone-300" />
-                      <p className="font-extrabold text-[#2C1810]">No restaurants found matching filters.</p>
+                      <p className="font-extrabold text-[#252525]">No restaurants found matching filters.</p>
                       <p className="text-xs text-stone-400">Try adjusting your search criteria or status filter.</p>
                     </div>
                   </td>
@@ -218,7 +218,7 @@ export default function RestaurantList() {
                   const isVerified = status === 'APPROVED' || status === 'ACTIVE';
 
                   return (
-                    <tr key={restaurant.id} className="hover:bg-[#FFF8F0]/50 transition-colors group">
+                    <tr key={restaurant.id} className="hover:bg-[#FFF5F5]/50 transition-colors group">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
                           <div className="h-10 w-10 rounded-xl bg-orange-100/70 border border-orange-200 overflow-hidden flex items-center justify-center shrink-0">
@@ -229,7 +229,7 @@ export default function RestaurantList() {
                             )}
                           </div>
                           <div>
-                            <span className="font-black text-[#2C1810] text-sm block group-hover:text-[#6F4E37] transition-colors">
+                            <span className="font-black text-[#252525] text-sm block group-hover:text-[#E50914] transition-colors">
                               {restaurant.name}
                             </span>
                             <span className="text-[10px] text-stone-400 font-semibold">
@@ -240,7 +240,7 @@ export default function RestaurantList() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex flex-col">
-                          <span className="font-bold text-[#2C1810]">
+                          <span className="font-bold text-[#252525]">
                             {restaurant.users?.name || restaurant.owner?.name || 'Partner Owner'}
                           </span>
                           <span className="text-[11px] text-stone-500">
@@ -253,7 +253,7 @@ export default function RestaurantList() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-1 font-semibold text-stone-700">
-                          <MapPin size={13} className="text-[#6F4E37] shrink-0" />
+                          <MapPin size={13} className="text-[#E50914] shrink-0" />
                           <span>{restaurant.city || restaurant.address || 'India'}</span>
                         </div>
                       </td>
@@ -275,7 +275,7 @@ export default function RestaurantList() {
                         </span>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex items-center font-black text-[#2C1810] gap-1">
+                        <div className="flex items-center font-black text-[#252525] gap-1">
                           <Star size={13} className="fill-amber-400 text-amber-400 stroke-[1.5]" />
                           <span>{restaurant.average_rating || restaurant.google_rating || '4.5'}</span>
                           <span className="text-stone-400 text-[10px] font-semibold">({restaurant.total_reviews || 0})</span>
@@ -285,7 +285,7 @@ export default function RestaurantList() {
                         <div className="flex items-center justify-end gap-2">
                           <button
                             onClick={() => setSelectedRestaurant(restaurant)}
-                            className="px-3 py-1.5 rounded-xl bg-[#FFF8F0] hover:bg-[#6F4E37] text-[#6F4E37] hover:text-white border border-[#DDB892] text-xs font-black transition-all cursor-pointer shadow-2xs"
+                            className="px-3 py-1.5 rounded-xl bg-[#FFF5F5] hover:bg-[#E50914] text-[#E50914] hover:text-white border border-[#EF5350] text-xs font-black transition-all cursor-pointer shadow-2xs"
                           >
                             View Details
                           </button>
@@ -332,7 +332,7 @@ export default function RestaurantList() {
               className="w-full max-w-2xl bg-white h-full shadow-2xl flex flex-col overflow-y-auto"
             >
               {/* Drawer Header */}
-              <div className="p-6 border-b border-[#E8DED5] bg-[#FFF8F0] flex items-center justify-between sticky top-0 z-10">
+              <div className="p-6 border-b border-[#FEE2E2] bg-[#FFF5F5] flex items-center justify-between sticky top-0 z-10">
                 <div className="flex items-center gap-3">
                   <div className="h-12 w-12 rounded-2xl bg-orange-100 border border-orange-200 overflow-hidden flex items-center justify-center shrink-0">
                     {selectedRestaurant.cover_image ? (
@@ -342,13 +342,13 @@ export default function RestaurantList() {
                     )}
                   </div>
                   <div>
-                    <h2 className="text-xl font-extrabold text-[#2C1810] leading-tight">{selectedRestaurant.name}</h2>
+                    <h2 className="text-xl font-extrabold text-[#252525] leading-tight">{selectedRestaurant.name}</h2>
                     <span className="text-xs text-stone-500 font-bold uppercase tracking-wider">{selectedRestaurant.category || 'Restaurant Partner'}</span>
                   </div>
                 </div>
                 <button
                   onClick={() => setSelectedRestaurant(null)}
-                  className="p-2 rounded-xl bg-white hover:bg-stone-100 text-stone-500 hover:text-[#2C1810] border border-stone-200 cursor-pointer"
+                  className="p-2 rounded-xl bg-white hover:bg-stone-100 text-stone-500 hover:text-[#252525] border border-stone-200 cursor-pointer"
                 >
                   <X size={18} />
                 </button>
@@ -357,7 +357,7 @@ export default function RestaurantList() {
               {/* Drawer Body */}
               <div className="p-6 space-y-6 flex-1">
                 {/* Status Badge & Actions */}
-                <div className="p-4 rounded-2xl bg-[#FFF8F0]/60 border border-[#E8DED5] flex items-center justify-between">
+                <div className="p-4 rounded-2xl bg-[#FFF5F5]/60 border border-[#FEE2E2] flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-black uppercase text-stone-500">Verification Status:</span>
                     <span className="px-3 py-1 rounded-full text-xs font-black bg-orange-100 text-orange-900 border border-orange-300">
@@ -386,21 +386,21 @@ export default function RestaurantList() {
 
                 {/* Owner Information */}
                 <div className="space-y-3">
-                  <h3 className="text-sm font-black text-[#6F4E37] uppercase tracking-wider border-b border-stone-100 pb-1.5 flex items-center gap-2">
+                  <h3 className="text-sm font-black text-[#E50914] uppercase tracking-wider border-b border-stone-100 pb-1.5 flex items-center gap-2">
                     <User size={15} /> Owner Information
                   </h3>
                   <div className="grid grid-cols-2 gap-4 text-xs">
                     <div>
                       <span className="text-stone-400 font-bold block">Owner Name</span>
-                      <span className="font-extrabold text-[#2C1810]">{selectedRestaurant.users?.name || 'N/A'}</span>
+                      <span className="font-extrabold text-[#252525]">{selectedRestaurant.users?.name || 'N/A'}</span>
                     </div>
                     <div>
                       <span className="text-stone-400 font-bold block">Email</span>
-                      <span className="font-extrabold text-[#2C1810]">{selectedRestaurant.users?.email || 'N/A'}</span>
+                      <span className="font-extrabold text-[#252525]">{selectedRestaurant.users?.email || 'N/A'}</span>
                     </div>
                     <div>
                       <span className="text-stone-400 font-bold block">Phone Number</span>
-                      <span className="font-extrabold text-[#2C1810]">{selectedRestaurant.users?.phone || selectedRestaurant.phone || 'N/A'}</span>
+                      <span className="font-extrabold text-[#252525]">{selectedRestaurant.users?.phone || selectedRestaurant.phone || 'N/A'}</span>
                     </div>
                     <div>
                       <span className="text-stone-400 font-bold block">Registered Role</span>
@@ -411,42 +411,42 @@ export default function RestaurantList() {
 
                 {/* Location & Address */}
                 <div className="space-y-3">
-                  <h3 className="text-sm font-black text-[#6F4E37] uppercase tracking-wider border-b border-stone-100 pb-1.5 flex items-center gap-2">
+                  <h3 className="text-sm font-black text-[#E50914] uppercase tracking-wider border-b border-stone-100 pb-1.5 flex items-center gap-2">
                     <MapPin size={15} /> Location Details
                   </h3>
                   <div className="grid grid-cols-2 gap-4 text-xs">
                     <div>
                       <span className="text-stone-400 font-bold block">City / Area</span>
-                      <span className="font-extrabold text-[#2C1810]">{selectedRestaurant.city || 'Madurai'}</span>
+                      <span className="font-extrabold text-[#252525]">{selectedRestaurant.city || 'Madurai'}</span>
                     </div>
                     <div>
                       <span className="text-stone-400 font-bold block">State / Country</span>
-                      <span className="font-extrabold text-[#2C1810]">{selectedRestaurant.state || 'Tamil Nadu'}, {selectedRestaurant.country || 'India'}</span>
+                      <span className="font-extrabold text-[#252525]">{selectedRestaurant.state || 'Tamil Nadu'}, {selectedRestaurant.country || 'India'}</span>
                     </div>
                     <div className="col-span-2">
                       <span className="text-stone-400 font-bold block">Full Address</span>
-                      <span className="font-extrabold text-[#2C1810]">{selectedRestaurant.address || 'Address not specified'}</span>
+                      <span className="font-extrabold text-[#252525]">{selectedRestaurant.address || 'Address not specified'}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Business Information & Capabilities */}
                 <div className="space-y-3">
-                  <h3 className="text-sm font-black text-[#6F4E37] uppercase tracking-wider border-b border-stone-100 pb-1.5 flex items-center gap-2">
+                  <h3 className="text-sm font-black text-[#E50914] uppercase tracking-wider border-b border-stone-100 pb-1.5 flex items-center gap-2">
                     <UtensilsCrossed size={15} /> Business Capabilities
                   </h3>
                   <div className="grid grid-cols-2 gap-4 text-xs">
                     <div>
                       <span className="text-stone-400 font-bold block">Seating Capacity</span>
-                      <span className="font-extrabold text-[#2C1810]">{selectedRestaurant.maximum_persons || 50} Persons</span>
+                      <span className="font-extrabold text-[#252525]">{selectedRestaurant.maximum_persons || 50} Persons</span>
                     </div>
                     <div>
                       <span className="text-stone-400 font-bold block">Event Services</span>
-                      <span className="font-extrabold text-[#2C1810]">{selectedRestaurant.provides_event_services ? 'Yes (Supported)' : 'No'}</span>
+                      <span className="font-extrabold text-[#252525]">{selectedRestaurant.provides_event_services ? 'Yes (Supported)' : 'No'}</span>
                     </div>
                     <div>
                       <span className="text-stone-400 font-bold block">3rd Party Decoration</span>
-                      <span className="font-extrabold text-[#2C1810]">{selectedRestaurant.allow_third_party_decoration ? 'Allowed' : 'Not Allowed'}</span>
+                      <span className="font-extrabold text-[#252525]">{selectedRestaurant.allow_third_party_decoration ? 'Allowed' : 'Not Allowed'}</span>
                     </div>
                     <div>
                       <span className="text-stone-400 font-bold block">Walk-In Dining</span>
@@ -468,9 +468,9 @@ export default function RestaurantList() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white rounded-3xl border border-[#E8DED5] p-6 max-w-md w-full shadow-2xl space-y-4"
+              className="bg-white rounded-3xl border border-[#FEE2E2] p-6 max-w-md w-full shadow-2xl space-y-4"
             >
-              <h3 className="text-lg font-black text-[#2C1810]">Reject Restaurant Listing</h3>
+              <h3 className="text-lg font-black text-[#252525]">Reject Restaurant Listing</h3>
               <p className="text-xs text-stone-500">Please provide a reason for rejecting this restaurant listing. This reason will be logged and communicated to the partner.</p>
               <textarea
                 rows={3}

@@ -125,8 +125,8 @@ export default function AdminSubscriptionDetailPage() {
 
   if (loading) {
     return (
-      <div className="p-12 text-center text-[#A67B5B]">
-        <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-3 text-[#6F4E37]" />
+      <div className="p-12 text-center text-[#B71C1C]">
+        <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-3 text-[#E50914]" />
         Loading subscription record details...
       </div>
     );
@@ -135,11 +135,11 @@ export default function AdminSubscriptionDetailPage() {
   if (!detail) {
     return (
       <div className="p-12 text-center">
-        <h3 className="text-xl font-bold text-[#2C1810]">Subscription Not Found</h3>
-        <p className="text-sm text-[#A67B5B] mt-1 mb-4">The requested subscription ID does not exist.</p>
+        <h3 className="text-xl font-bold text-[#252525]">Subscription Not Found</h3>
+        <p className="text-sm text-[#B71C1C] mt-1 mb-4">The requested subscription ID does not exist.</p>
         <Link
           href="/admin/subscriptions"
-          className="px-4 py-2 bg-[#6F4E37] text-white rounded-xl text-sm font-semibold hover:bg-[#5a3e2b]"
+          className="px-4 py-2 bg-[#E50914] text-white rounded-xl text-sm font-semibold hover:bg-[#5a3e2b]"
         >
           Back to Overview
         </Link>
@@ -152,21 +152,21 @@ export default function AdminSubscriptionDetailPage() {
   return (
     <div className="space-y-6 pb-12">
       {/* Top Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-[#E8DED5] shadow-xs">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-[#FEE2E2] shadow-xs">
         <div className="flex items-center gap-4">
           <button
             onClick={() => router.back()}
-            className="p-2 rounded-xl bg-[#FFF8F0] border border-[#E8DED5] text-[#6F4E37] hover:bg-[#FCEFE3] transition-colors"
+            className="p-2 rounded-xl bg-[#FFF5F5] border border-[#FEE2E2] text-[#E50914] hover:bg-[#FCEFE3] transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
             <div className="flex items-center gap-3">
-              <h1 className="text-2xl font-bold text-[#2C1810]">{partnerInfo.businessName}</h1>
+              <h1 className="text-2xl font-bold text-[#252525]">{partnerInfo.businessName}</h1>
               {getStatusBadge(subscription.status)}
             </div>
-            <p className="text-sm text-[#A67B5B]">
-              Partner Type: <span className="font-semibold text-[#6F4E37]">{partnerInfo.partnerType}</span> • ID:{' '}
+            <p className="text-sm text-[#B71C1C]">
+              Partner Type: <span className="font-semibold text-[#E50914]">{partnerInfo.partnerType}</span> • ID:{' '}
               <code className="text-xs font-mono">{subscription.id}</code>
             </p>
           </div>
@@ -185,112 +185,112 @@ export default function AdminSubscriptionDetailPage() {
       {/* Grid: Information Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Partner Info Card */}
-        <div className="bg-white p-5 rounded-2xl border border-[#E8DED5] shadow-xs space-y-3">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A67B5B] border-b border-[#E8DED5] pb-2">
-            <Building className="w-4 h-4 text-[#6F4E37]" /> Partner Info
+        <div className="bg-white p-5 rounded-2xl border border-[#FEE2E2] shadow-xs space-y-3">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#B71C1C] border-b border-[#FEE2E2] pb-2">
+            <Building className="w-4 h-4 text-[#E50914]" /> Partner Info
           </div>
           <div>
-            <div className="text-xs text-[#A67B5B]">Business Name</div>
-            <div className="font-bold text-[#2C1810]">{partnerInfo.businessName}</div>
+            <div className="text-xs text-[#B71C1C]">Business Name</div>
+            <div className="font-bold text-[#252525]">{partnerInfo.businessName}</div>
           </div>
           <div>
-            <div className="text-xs text-[#A67B5B]">Owner / User</div>
-            <div className="text-sm font-semibold text-[#2C1810] flex items-center gap-1.5">
-              <User className="w-3.5 h-3.5 text-[#A67B5B]" /> {partnerInfo.ownerName}
+            <div className="text-xs text-[#B71C1C]">Owner / User</div>
+            <div className="text-sm font-semibold text-[#252525] flex items-center gap-1.5">
+              <User className="w-3.5 h-3.5 text-[#B71C1C]" /> {partnerInfo.ownerName}
             </div>
           </div>
           <div>
-            <div className="text-xs text-[#A67B5B]">Contact Email</div>
-            <div className="text-xs font-medium text-[#2C1810] flex items-center gap-1.5">
-              <Mail className="w-3.5 h-3.5 text-[#A67B5B]" /> {partnerInfo.email}
+            <div className="text-xs text-[#B71C1C]">Contact Email</div>
+            <div className="text-xs font-medium text-[#252525] flex items-center gap-1.5">
+              <Mail className="w-3.5 h-3.5 text-[#B71C1C]" /> {partnerInfo.email}
             </div>
           </div>
           {partnerInfo.phone && (
             <div>
-              <div className="text-xs text-[#A67B5B]">Phone</div>
-              <div className="text-xs font-medium text-[#2C1810] flex items-center gap-1.5">
-                <Phone className="w-3.5 h-3.5 text-[#A67B5B]" /> {partnerInfo.phone}
+              <div className="text-xs text-[#B71C1C]">Phone</div>
+              <div className="text-xs font-medium text-[#252525] flex items-center gap-1.5">
+                <Phone className="w-3.5 h-3.5 text-[#B71C1C]" /> {partnerInfo.phone}
               </div>
             </div>
           )}
         </div>
 
         {/* Subscription Plan Card */}
-        <div className="bg-white p-5 rounded-2xl border border-[#E8DED5] shadow-xs space-y-3">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A67B5B] border-b border-[#E8DED5] pb-2">
-            <ShieldCheck className="w-4 h-4 text-[#6F4E37]" /> Subscription Plan
+        <div className="bg-white p-5 rounded-2xl border border-[#FEE2E2] shadow-xs space-y-3">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#B71C1C] border-b border-[#FEE2E2] pb-2">
+            <ShieldCheck className="w-4 h-4 text-[#E50914]" /> Subscription Plan
           </div>
           <div>
-            <div className="text-xs text-[#A67B5B]">Active Plan</div>
-            <div className="font-bold text-[#2C1810]">{subscription.planName}</div>
+            <div className="text-xs text-[#B71C1C]">Active Plan</div>
+            <div className="font-bold text-[#252525]">{subscription.planName}</div>
           </div>
           <div>
-            <div className="text-xs text-[#A67B5B]">Pricing & Cycle</div>
-            <div className="text-sm font-bold text-[#6F4E37]">
+            <div className="text-xs text-[#B71C1C]">Pricing & Cycle</div>
+            <div className="text-sm font-bold text-[#E50914]">
               ₹{subscription.price} / {subscription.billingCycle.toLowerCase()}
             </div>
           </div>
           <div>
-            <div className="text-xs text-[#A67B5B]">Subscription Start Date</div>
-            <div className="text-xs font-semibold text-[#2C1810]">
+            <div className="text-xs text-[#B71C1C]">Subscription Start Date</div>
+            <div className="text-xs font-semibold text-[#252525]">
               {new Date(subscription.startDate).toLocaleDateString()}
             </div>
           </div>
           <div>
-            <div className="text-xs text-[#A67B5B]">Current Period End / Next Billing</div>
-            <div className="text-xs font-semibold text-[#2C1810]">
+            <div className="text-xs text-[#B71C1C]">Current Period End / Next Billing</div>
+            <div className="text-xs font-semibold text-[#252525]">
               {subscription.currentPeriodEnd ? new Date(subscription.currentPeriodEnd).toLocaleDateString() : 'N/A'}
             </div>
           </div>
         </div>
 
         {/* Razorpay Information Card */}
-        <div className="bg-white p-5 rounded-2xl border border-[#E8DED5] shadow-xs space-y-3">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A67B5B] border-b border-[#E8DED5] pb-2">
-            <CreditCard className="w-4 h-4 text-[#6F4E37]" /> Razorpay Details
+        <div className="bg-white p-5 rounded-2xl border border-[#FEE2E2] shadow-xs space-y-3">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#B71C1C] border-b border-[#FEE2E2] pb-2">
+            <CreditCard className="w-4 h-4 text-[#E50914]" /> Razorpay Details
           </div>
           <div>
-            <div className="text-xs text-[#A67B5B]">Razorpay Subscription ID</div>
-            <code className="px-2 py-1 bg-[#FFF8F0] border border-[#E8DED5] rounded text-xs font-mono text-[#6F4E37] block w-fit mt-1">
+            <div className="text-xs text-[#B71C1C]">Razorpay Subscription ID</div>
+            <code className="px-2 py-1 bg-[#FFF5F5] border border-[#FEE2E2] rounded text-xs font-mono text-[#E50914] block w-fit mt-1">
               {razorpay.razorpaySubscriptionId}
             </code>
           </div>
           <div>
-            <div className="text-xs text-[#A67B5B]">Razorpay Customer ID</div>
-            <code className="px-2 py-1 bg-[#FFF8F0] border border-[#E8DED5] rounded text-xs font-mono text-[#6F4E37] block w-fit mt-1">
+            <div className="text-xs text-[#B71C1C]">Razorpay Customer ID</div>
+            <code className="px-2 py-1 bg-[#FFF5F5] border border-[#FEE2E2] rounded text-xs font-mono text-[#E50914] block w-fit mt-1">
               {razorpay.razorpayCustomerId}
             </code>
           </div>
           <div>
-            <div className="text-xs text-[#A67B5B]">Razorpay Plan ID</div>
-            <code className="px-2 py-1 bg-[#FFF8F0] border border-[#E8DED5] rounded text-xs font-mono text-[#6F4E37] block w-fit mt-1">
+            <div className="text-xs text-[#B71C1C]">Razorpay Plan ID</div>
+            <code className="px-2 py-1 bg-[#FFF5F5] border border-[#FEE2E2] rounded text-xs font-mono text-[#E50914] block w-fit mt-1">
               {razorpay.razorpayPlanId}
             </code>
           </div>
         </div>
 
         {/* Payment Metrics Card */}
-        <div className="bg-white p-5 rounded-2xl border border-[#E8DED5] shadow-xs space-y-3">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A67B5B] border-b border-[#E8DED5] pb-2">
-            <DollarSign className="w-4 h-4 text-[#6F4E37]" /> Payment Summary
+        <div className="bg-white p-5 rounded-2xl border border-[#FEE2E2] shadow-xs space-y-3">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#B71C1C] border-b border-[#FEE2E2] pb-2">
+            <DollarSign className="w-4 h-4 text-[#E50914]" /> Payment Summary
           </div>
           <div className="grid grid-cols-2 gap-2">
             <div>
-              <div className="text-xs text-[#A67B5B]">Total Payments</div>
-              <div className="text-lg font-bold text-[#2C1810]">{payment.totalPayments}</div>
+              <div className="text-xs text-[#B71C1C]">Total Payments</div>
+              <div className="text-lg font-bold text-[#252525]">{payment.totalPayments}</div>
             </div>
             <div>
-              <div className="text-xs text-[#A67B5B]">Successful</div>
+              <div className="text-xs text-[#B71C1C]">Successful</div>
               <div className="text-lg font-bold text-emerald-600">{payment.successfulPayments}</div>
             </div>
           </div>
           <div>
-            <div className="text-xs text-[#A67B5B]">Last Payment Amount</div>
-            <div className="text-sm font-bold text-[#6F4E37]">₹{payment.lastPaymentAmount}</div>
+            <div className="text-xs text-[#B71C1C]">Last Payment Amount</div>
+            <div className="text-sm font-bold text-[#E50914]">₹{payment.lastPaymentAmount}</div>
           </div>
           <div>
-            <div className="text-xs text-[#A67B5B]">Last Payment Date</div>
-            <div className="text-xs font-semibold text-[#2C1810]">
+            <div className="text-xs text-[#B71C1C]">Last Payment Date</div>
+            <div className="text-xs font-semibold text-[#252525]">
               {payment.lastPaymentDate ? new Date(payment.lastPaymentDate).toLocaleDateString() : 'N/A'}
             </div>
           </div>
@@ -298,23 +298,23 @@ export default function AdminSubscriptionDetailPage() {
       </div>
 
       {/* Subscription Timeline */}
-      <div className="bg-white p-6 rounded-2xl border border-[#E8DED5] shadow-xs space-y-4">
-        <div className="flex items-center gap-2 text-base font-bold text-[#2C1810]">
-          <Activity className="w-5 h-5 text-[#6F4E37]" /> Subscription Timeline
+      <div className="bg-white p-6 rounded-2xl border border-[#FEE2E2] shadow-xs space-y-4">
+        <div className="flex items-center gap-2 text-base font-bold text-[#252525]">
+          <Activity className="w-5 h-5 text-[#E50914]" /> Subscription Timeline
         </div>
 
         {timeline.length === 0 ? (
-          <div className="text-sm text-[#A67B5B]">No timeline events recorded yet.</div>
+          <div className="text-sm text-[#B71C1C]">No timeline events recorded yet.</div>
         ) : (
-          <div className="relative border-l-2 border-[#E8DED5] ml-4 pl-6 space-y-6">
+          <div className="relative border-l-2 border-[#FEE2E2] ml-4 pl-6 space-y-6">
             {timeline.map((event, idx) => (
               <div key={idx} className="relative">
-                <div className="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-[#6F4E37] border-4 border-white shadow-xs" />
-                <div className="text-xs font-bold text-[#6F4E37]">
+                <div className="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-[#E50914] border-4 border-white shadow-xs" />
+                <div className="text-xs font-bold text-[#E50914]">
                   {new Date(event.date).toLocaleString()}
                 </div>
-                <div className="text-sm font-bold text-[#2C1810] mt-0.5">{event.title}</div>
-                <div className="text-xs text-[#A67B5B] mt-0.5">{event.description}</div>
+                <div className="text-sm font-bold text-[#252525] mt-0.5">{event.title}</div>
+                <div className="text-xs text-[#B71C1C] mt-0.5">{event.description}</div>
               </div>
             ))}
           </div>
@@ -324,18 +324,18 @@ export default function AdminSubscriptionDetailPage() {
       {/* Cancel Confirmation Modal */}
       {showCancelModal && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl border border-[#E8DED5] max-w-md w-full p-6 space-y-4 shadow-xl">
-            <div className="flex items-center gap-3 text-rose-600 border-b border-[#E8DED5] pb-3">
+          <div className="bg-white rounded-2xl border border-[#FEE2E2] max-w-md w-full p-6 space-y-4 shadow-xl">
+            <div className="flex items-center gap-3 text-rose-600 border-b border-[#FEE2E2] pb-3">
               <AlertTriangle className="w-6 h-6" />
-              <h3 className="text-lg font-bold text-[#2C1810]">Cancel Partner Subscription?</h3>
+              <h3 className="text-lg font-bold text-[#252525]">Cancel Partner Subscription?</h3>
             </div>
 
-            <p className="text-sm text-[#A67B5B]">
-              This will update the status of <span className="font-bold text-[#2C1810]">{partnerInfo.businessName}</span>'s subscription to <span className="font-bold text-rose-600">CANCELLED</span> and prevent auto-renewals.
+            <p className="text-sm text-[#B71C1C]">
+              This will update the status of <span className="font-bold text-[#252525]">{partnerInfo.businessName}</span>'s subscription to <span className="font-bold text-rose-600">CANCELLED</span> and prevent auto-renewals.
             </p>
 
             <div>
-              <label className="block text-xs font-bold text-[#6F4E37] uppercase mb-1">
+              <label className="block text-xs font-bold text-[#E50914] uppercase mb-1">
                 Reason for Cancellation <span className="text-rose-500">*</span>
               </label>
               <textarea
@@ -343,7 +343,7 @@ export default function AdminSubscriptionDetailPage() {
                 value={cancelReason}
                 onChange={(e) => setCancelReason(e.target.value)}
                 placeholder="Enter formal reason for audit logging..."
-                className="w-full p-3 bg-[#FFF8F0] border border-[#E8DED5] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#6F4E37]"
+                className="w-full p-3 bg-[#FFF5F5] border border-[#FEE2E2] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#E50914]"
               />
             </div>
 
@@ -351,7 +351,7 @@ export default function AdminSubscriptionDetailPage() {
               <button
                 type="button"
                 onClick={() => setShowCancelModal(false)}
-                className="px-4 py-2 border border-[#E8DED5] rounded-xl text-sm font-semibold text-[#6F4E37] hover:bg-[#FFF8F0]"
+                className="px-4 py-2 border border-[#FEE2E2] rounded-xl text-sm font-semibold text-[#E50914] hover:bg-[#FFF5F5]"
               >
                 Back
               </button>

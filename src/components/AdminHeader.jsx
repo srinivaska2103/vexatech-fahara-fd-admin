@@ -33,13 +33,13 @@ export default function AdminHeader() {
         <Link href="/admin/dashboard" className="flex items-center gap-2 md:hidden shrink-0">
           <div className="relative h-8 w-8 overflow-hidden rounded-xl border border-fahara-border shadow-xs">
             <img
-              src="/Fahara Logo.jpeg"
-              alt="Fahara Logo"
+              src="/grab-it-logo.png"
+              alt="Grab2GO Logo"
               className="h-full w-full object-cover"
             />
           </div>
           <div className="flex flex-col">
-            <span className="text-xs font-extrabold tracking-tight text-fahara-text leading-tight">Fahara</span>
+            <span className="text-xs font-extrabold tracking-tight text-fahara-text leading-tight">Grab2GO</span>
             <span className="text-[8px] font-bold tracking-wider text-fahara-secondary uppercase leading-none">Admin</span>
           </div>
         </Link>

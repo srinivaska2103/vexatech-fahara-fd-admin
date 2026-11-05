@@ -1,7 +1,7 @@
 {
-  "name": "Fahara Admin Management Suite",
-  "short_name": "Fahara Admin",
-  "description": "Fahara Admin Web Application & Vendor Management Suite",
+  "name": "Grab2GO Admin Management Suite",
+  "short_name": "Grab2GO Admin",
+  "description": "Grab2GO Admin Web Application & Vendor Management Suite",
   "start_url": "/admin/dashboard",
   "display": "standalone",
   "background_color": "#FAF7F2",
@@ -9,13 +9,13 @@
   "orientation": "any",
   "icons": [
     {
-      "src": "/Fahara Logo.jpeg",
+      "src": "/GRAB IT Logo.jpeg",
       "sizes": "192x192",
       "type": "image/jpeg",
       "purpose": "any maskable"
     },
     {
-      "src": "/Fahara Logo.jpeg",
+      "src": "/GRAB IT Logo.jpeg",
       "sizes": "512x512",
       "type": "image/jpeg",
       "purpose": "any maskable"

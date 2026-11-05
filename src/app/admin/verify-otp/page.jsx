@@ -101,8 +101,8 @@ export default function VerifyOtp() {
         <div className="flex flex-col items-center mb-6">
           <div className="relative mb-4 h-16 w-16 overflow-hidden rounded-2xl border-2 border-fahara-border bg-fahara-surface shadow-md p-0.5">
             <img 
-              src="/Fahara Logo.jpeg" 
-              alt="Fahara Logo" 
+              src="/grab-it-logo.png" 
+              alt="Grab2GO Logo" 
               className="h-full w-full object-cover rounded-xl"
             />
           </div>

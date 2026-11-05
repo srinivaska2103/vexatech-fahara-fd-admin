@@ -51,18 +51,18 @@ export const CustomSelect = ({
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full h-10 px-3.5 rounded-2xl border transition-all duration-200 flex items-center justify-between text-xs font-extrabold cursor-pointer shadow-2xs ${
           isOpen
-            ? 'border-fahara-primary ring-2 ring-fahara-primary/20 bg-[#FFF5EA] text-[#2C1810]'
+            ? 'border-fahara-primary ring-2 ring-fahara-primary/20 bg-[#FFF5F5] text-[#252525]'
             : value 
-              ? 'border-fahara-primary/60 bg-amber-50/60 hover:bg-[#FFF5EA] text-[#6F4E37]' 
-              : 'border-[#DDB892]/80 bg-[#FFF8F0] hover:bg-[#FFF5EA] text-[#2C1810] hover:border-fahara-primary'
+              ? 'border-fahara-primary/60 bg-amber-50/60 hover:bg-[#FFF5F5] text-[#E50914]' 
+              : 'border-[#EF5350]/80 bg-[#FFF5F5] hover:bg-[#FFF5F5] text-[#252525] hover:border-fahara-primary'
         }`}
       >
         <div className="flex items-center gap-2 truncate">
-          {Icon && <Icon className="w-3.5 h-3.5 text-[#6F4E37] shrink-0" />}
+          {Icon && <Icon className="w-3.5 h-3.5 text-[#E50914] shrink-0" />}
           <span className="truncate">{displayLabel}</span>
         </div>
         <ChevronDown 
-          className={`w-3.5 h-3.5 text-[#6F4E37] transition-transform duration-200 shrink-0 ml-1.5 ${
+          className={`w-3.5 h-3.5 text-[#E50914] transition-transform duration-200 shrink-0 ml-1.5 ${
             isOpen ? 'rotate-180' : ''
           }`} 
         />
@@ -76,7 +76,7 @@ export const CustomSelect = ({
             animate={{ opacity: 1, y: 4, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.97 }}
             transition={{ duration: 0.15, ease: 'easeOut' }}
-            className="absolute left-0 right-0 z-50 mt-1 max-h-60 overflow-y-auto rounded-2xl bg-white border border-[#DDB892] shadow-2xl p-1.5 custom-scrollbar text-[#2C1810]"
+            className="absolute left-0 right-0 z-50 mt-1 max-h-60 overflow-y-auto rounded-2xl bg-white border border-[#EF5350] shadow-2xl p-1.5 custom-scrollbar text-[#252525]"
           >
             {options.map((opt) => {
               const optValue = getOptionValue(opt);
@@ -90,8 +90,8 @@ export const CustomSelect = ({
                   onClick={() => handleSelect(optValue)}
                   className={`w-full px-3 py-2 rounded-xl text-xs font-extrabold flex items-center justify-between transition-all duration-150 cursor-pointer ${
                     isSelected
-                      ? 'bg-gradient-to-r from-[#6F4E37] to-[#8C6D58] text-white shadow-xs'
-                      : 'text-[#2C1810] hover:bg-[#FFF5EA] hover:text-[#6F4E37]'
+                      ? 'bg-gradient-to-r from-[#E50914] to-[#757575] text-white shadow-xs'
+                      : 'text-[#252525] hover:bg-[#FFF5F5] hover:text-[#E50914]'
                   }`}
                 >
                   <span className="truncate">{optLabel}</span>
